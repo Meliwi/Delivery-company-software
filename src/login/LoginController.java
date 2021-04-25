@@ -1,4 +1,4 @@
-package sample;
+package login;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,7 +31,7 @@ public class LoginController implements Initializable {
     private void loginButtonAction(ActionEvent event) throws IOException {
         System.out.println("You clicked me!");
         //if (correo.getText().isBlank() == false && contraseña.getText().isBlank()==false){
-        Parent root = FXMLLoader.load(getClass().getResource("modules.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/modules/modules.fxml"));
         Stage modulesStage = new Stage();
         modulesStage.setTitle("Gestión de módulos");
         modulesStage.setScene(new Scene(root, 900, 600));

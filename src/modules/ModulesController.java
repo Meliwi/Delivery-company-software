@@ -1,4 +1,5 @@
-package sample;
+package modules;
 
 public class ModulesController {
+
 }
