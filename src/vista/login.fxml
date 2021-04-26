@@ -8,18 +8,15 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.control.*?>
 
-
-<HBox fx:controller="login.LoginController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<HBox fx:controller="controlador.LoginController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" >
     <children>
         <Pane prefHeight="600.0" prefWidth="458.0">
             <children>
                 <ImageView fitHeight="600.0" fitWidth="458.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="/Images/background-final.png"/>
-                    </image>
-                </ImageView>
+               <image>
+                  <Image url="file:/C:/Users/USUARIO/Documents/Proyecto-desarrollo-I/src/Images/background-final.png" />
+               </image></ImageView>
                 <Pane layoutX="255.0" layoutY="111.0" minWidth="300.0" prefHeight="380.0" prefWidth="410.0" style="-fx-background-color: white;">
                     <children>
                         <Label layoutX="115.0" layoutY="74.0" prefHeight="41.0" prefWidth="180.0" text="Bienvenido" textAlignment="CENTER" textFill="#006ee1">
@@ -42,7 +39,7 @@
                                 <Font name="Arial" size="14.0" />
                             </font>
                         </TextField>
-                        <Button  fx:id="loginbutton" layoutX="166.0" layoutY="291.0" mnemonicParsing="false"  onAction="#loginButtonAction" style="-fx-background-color: #006ee1;" text="INGRESAR" textAlignment="CENTER" textFill="WHITE">
+                        <Button fx:id="loginbutton" layoutX="166.0" layoutY="291.0" mnemonicParsing="false" onAction="#loginButtonAction" style="-fx-background-color: #006ee1;" text="INGRESAR" textAlignment="CENTER" textFill="WHITE">
                             <font>
                                 <Font name="Arial" size="12.0" />
                             </font>
