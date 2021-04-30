@@ -4,6 +4,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.control.Button?>
 
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="/vista/login.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.LoginController">
     <children>
@@ -23,6 +24,11 @@
                                 <Font name="Arial" size="14.0" />
                             </font>
                         </Label>
+                        <Button fx:id="loginbutton" layoutX="166.0" layoutY="291.0" mnemonicParsing="false" onAction="#loginButtonAction" style="-fx-background-color: #006ee1;" text="CONTINUAR" textAlignment="CENTER" textFill="WHITE">
+                            <font>
+                                <Font name="Arial" size="12.0" />
+                            </font>
+                        </Button>
                     </children>
                 </Pane>
             </children>
