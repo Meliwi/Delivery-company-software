@@ -1,11 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controlador.ModulesController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="/vista/login.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.LoginController">
+    <children>
+        <Pane prefHeight="600.0" prefWidth="458.0">
+            <children>
+                <ImageView fx:id="panelFondo" fitHeight="600.0" fitWidth="458.0" pickOnBounds="true" preserveRatio="true">
+                </ImageView>
+                <Pane fx:id="panelForm" layoutX="255.0" layoutY="111.0" minWidth="300.0" prefHeight="380.0" prefWidth="410.0" style="-fx-background-color: white;">
+                    <children>
+                        <Label layoutX="115.0" layoutY="74.0" prefHeight="41.0" prefWidth="300" text="Gestion de modulos" textAlignment="CENTER" textFill="#006ee1">
+                            <font>
+                                <Font name="Franklin Gothic Heavy" size="32.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="115.0" layoutY="115.0" prefHeight="17.0" prefWidth="190.0" text="Seleccione un area" textFill="#c7c7c7">
+                            <font>
+                                <Font name="Arial" size="14.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </Pane>
+            </children>
+        </Pane>
+    </children>
+</HBox>

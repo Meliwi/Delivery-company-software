@@ -24,7 +24,6 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
-
     }
 
     @FXML
@@ -32,11 +31,11 @@ public class LoginController implements Initializable {
         System.out.println("You clicked me!");
         //if (correo.getText().isBlank() == false && contraseña.getText().isBlank()==false){
         Parent root = FXMLLoader.load(getClass().getResource("/vista/modules.fxml"));
-        Stage modulesStage = new Stage();
+        Stage modulesStage = ((Stage)(((Button)event.getSource()).getScene().getWindow()));//new Stage();
         modulesStage.setTitle("Gestión de módulos");
         modulesStage.setScene(new Scene(root, 900, 600));
         //Para cerrar la ventana de login
-        ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
+        //((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
         modulesStage.show();
     }
 }
