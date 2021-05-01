@@ -7,7 +7,7 @@ import javafx.beans.property.StringProperty;
 
 import java.lang.String;
 
-public class Usuarios {
+public class Users {
     private StringProperty cedula;
     private StringProperty num_nomina;
     private StringProperty id_estado;
@@ -20,10 +20,10 @@ public class Usuarios {
     private StringProperty telefono;
     private StringProperty correo;
     private StringProperty contrasena;
-    private static Usuarios usuarios;
+    private static Users usuarios;
 
-    public Usuarios(String cedula, String num_nomina, String id_estado, String codigo_rol, String nit_empresa,
-                    int id_pos, int id_sede, String nombre, String apellido, String telefono, String correo, String contrasena)
+    public Users(String cedula, String num_nomina, String id_estado, String codigo_rol, String nit_empresa,
+                 int id_pos, int id_sede, String nombre, String apellido, String telefono, String correo, String contrasena)
     {
         this.cedula = new SimpleStringProperty(cedula);
         this.num_nomina = new SimpleStringProperty(num_nomina);
@@ -40,9 +40,9 @@ public class Usuarios {
 
     }
 
-    public static Usuarios getInstanceUser(String cedula, String num_nomina, String id_estado, String codigo_rol, String nit_empresa, int id_pos, int id_sede, String nombre, String apellido, String telefono,String correo, String contrasena) {
+    public static Users getInstanceUser(String cedula, String num_nomina, String id_estado, String codigo_rol, String nit_empresa, int id_pos, int id_sede, String nombre, String apellido, String telefono, String correo, String contrasena) {
         if (usuarios == null) {
-            usuarios = new Usuarios(cedula, num_nomina,id_estado,codigo_rol,nit_empresa,id_pos,id_sede,nombre,apellido,telefono,correo,contrasena);
+            usuarios = new Users(cedula, num_nomina,id_estado,codigo_rol,nit_empresa,id_pos,id_sede,nombre,apellido,telefono,correo,contrasena);
         }
         return usuarios;
     }

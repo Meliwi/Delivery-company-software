@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="/vista/login.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.LoginController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="/vista/styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.LoginController">
     <children>
         <Pane prefHeight="600.0" prefWidth="458.0">
             <children>
@@ -32,7 +32,7 @@
                                 <Font name="Arial" size="14.0" />
                             </font>
                         </TextField>
-                        <PasswordField fx:id="contraseña" layoutX="120.0" layoutY="212.0" promptText="Contraseña">
+                        <PasswordField fx:id="contrasena" layoutX="120.0" layoutY="212.0" promptText="Contraseña">
                             <font>
                                 <Font name="Arial" size="14.0" />
                             </font>
@@ -46,7 +46,7 @@
                   </ImageView>
                   <ImageView fx:id="iconoUsuario" fitHeight="23.0" fitWidth="21.0" layoutX="88.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true">
                   </ImageView>
-                  <Label fx:id="UsuarioInvalido" layoutX="126.0" layoutY="254.0" prefHeight="17.0" prefWidth="180.0" textAlignment="RIGHT" textFill="#006ee1">
+                  <Label fx:id="UsuarioInvalido" layoutX="126.0" layoutY="254.0" prefHeight="17.0" prefWidth="180.0" textAlignment="RIGHT" textFill="#f02849">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>

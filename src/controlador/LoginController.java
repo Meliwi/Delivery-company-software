@@ -11,7 +11,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
-import modelo.Conexion;
+import modelo.Connect;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,12 +20,11 @@ import java.net.URL;
 
 
 public class LoginController implements Initializable {
-    @FXML
-    private Button loginbutton;
+
     @FXML
     private TextField correo;
     @FXML
-    private PasswordField contraseña;
+    private PasswordField contrasena;
     @FXML
     private Label UsuarioInvalido;
 
@@ -37,11 +36,11 @@ public class LoginController implements Initializable {
     @FXML
     private void loginButtonAction(ActionEvent event) {
         //conexión a base de datos
-        Conexion con  = new Conexion();
+        Connect con  = new Connect();
         try{
             //En resultado se guarda la consulta de buscar lo que el usuario ingreso en la base de datos
             ResultSet resultado = con.CONSULTAR("SELECT * FROM usuarios WHERE correo = '"+correo.getText().trim()+"'" +
-                    "AND contrasena = '"+contraseña.getText().trim()+"';");
+                    "AND contrasena = '"+contrasena.getText().trim()+"';");
             if(resultado.next()){
                 Parent root = FXMLLoader.load(getClass().getResource("/vista/modules.fxml"));
                 Stage modulesStage = ((Stage)(((Button)event.getSource()).getScene().getWindow()));//new Stage();

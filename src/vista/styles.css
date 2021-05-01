@@ -17,3 +17,8 @@
 #iconoContra{
     -fx-image: url("/Images/lock.png");
 }
+
+#dropCascade{
+    -fx-font-size: 14px;
+     -fx-font-family: "Arial";
+}

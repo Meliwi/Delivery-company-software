@@ -4,13 +4,13 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Conexion {
+public class Connect {
     //creacion de variable de conexion
     private Connection conexion;
     private Statement st;
 
     //constructor
-    public Conexion(){
+    public Connect(){
         try {
             Class.forName("org.postgresql.Driver");
             conexion = DriverManager.getConnection("jdbc:postgresql://ec2-54-167-152-185.compute-1.amazonaws.com:5432/d10eemjdpri947",
@@ -19,7 +19,7 @@ public class Conexion {
             st = conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
         }
         catch(Exception ex){
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null,ex);
+            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null,ex);
         }
     }
     //retornar el resultado de consultar en la base de datos
@@ -37,7 +37,7 @@ public class Conexion {
         try {
             conexion.close();
         } catch (SQLException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null,ex);
+            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null,ex);
         }
     }
 }
