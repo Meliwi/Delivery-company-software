@@ -21,6 +21,8 @@ public class LoginController implements Initializable {
     private TextField correo;
     @FXML
     private TextField contraseña;
+    @FXML
+    private String Rol = "admin";
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
