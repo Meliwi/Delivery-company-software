@@ -15,8 +15,6 @@ public class Main extends Application {
         primaryStage.setTitle("Login");
         primaryStage.setScene(new Scene(root, 900, 600));
         primaryStage.show();
-
-        Conexion con  = new Conexion();
     }
 
     public static void main(String[] args) {
