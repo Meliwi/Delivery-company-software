@@ -14,33 +14,39 @@ package controlador;
         import java.util.ResourceBundle;
         import java.net.URL;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class ModulesController implements Initializable {
-    @FXML
-    private Button loginbutton;
-    @FXML
-    private String Rol = "admin";
-    @FXML
-    private String contraseña;
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
+
     }
 
     @FXML
-    private void loginButtonAction(ActionEvent event) throws IOException {
-        System.out.println("You clicked me!");
-        //if (correo.getText().isBlank() == false && contraseña.getText().isBlank()==false){
-        Parent root = FXMLLoader.load(getClass().getResource("/vista/modules.fxml"));
-        Stage modulesStage = ((Stage)(((Button)event.getSource()).getScene().getWindow()));//new Stage();
-        modulesStage.setTitle("Gestión de módulos");
-        modulesStage.setScene(new Scene(root, 900, 600));
-        //Para cerrar la ventana de login
-        //((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
-        modulesStage.show();
+    public void usuariosControlBoton(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/vista/users.fxml"));
+        Stage UserStage = ((Stage)(((Button)event.getSource()).getScene().getWindow()));
+        UserStage.setTitle("Gestión de Usuarios");
+        UserStage.setScene(new Scene(root, 900, 600));
+        UserStage.show();
     }
-
-    public void main(String[] args) {
-
+    @FXML
+    public void RegresarControlBoton(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/vista/login.fxml"));
+        Stage loginStage = ((Stage)(((Button)event.getSource()).getScene().getWindow()));
+        loginStage.setTitle("Login");
+        loginStage.setScene(new Scene(root, 900, 600));
+        loginStage.show();
     }
 }
