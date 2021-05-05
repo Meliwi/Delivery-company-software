@@ -40,7 +40,7 @@ public class LoginController implements Initializable {
         Connect con  = new Connect();
         try{
             //En resultado se guarda la consulta de buscar lo que el usuario ingreso en la base de datos
-            ResultSet resultado = con.CONSULTAR("SELECT * FROM usuarios WHERE correo = '"+correo.getText().trim()+"'" +
+            ResultSet resultado = con.CONSULTAR("SELECT * FROM usuarios WHERE correo = '"+correo.getText().trim()+"' " +
                     "AND contrasena = '"+contrasena.getText().trim()+"';");
             if(resultado.next()){
                 Parent root = FXMLLoader.load(getClass().getResource("/vista/modules.fxml"));

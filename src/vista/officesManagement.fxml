@@ -80,12 +80,12 @@
         </Pane>
       <Pane prefHeight="600.0" prefWidth="442.0">
          <children>
-            <Button fx:id="loginbutton21" layoutX="243.0" layoutY="27.0" mnemonicParsing="false" onAction="#loginButtonAction" style="-fx-background-color: #006ee1;" text="MÓDULOS" textAlignment="CENTER" textFill="WHITE">
+             <Button fx:id="ModulosBoton" layoutX="233.0" layoutY="14.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="77.0" style="-fx-background-color: #006ee1;" text="MÓDULOS" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Arial" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="loginbutton211" layoutX="330.0" layoutY="27.0" mnemonicParsing="false" onAction="#loginButtonAction" style="-fx-background-color: #2b6099;" text="CONSULTAR" textAlignment="CENTER" textFill="WHITE">
+             <Button fx:id="ConsultarBoton" layoutX="321.0" layoutY="14.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="96.0" style="-fx-background-color: #3964B3;" text="CONSULTAR" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Arial" size="12.0" />
                </font>
