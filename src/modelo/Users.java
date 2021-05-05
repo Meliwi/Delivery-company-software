@@ -13,13 +13,13 @@ public class Users {
     private StringProperty id_estado;
     private StringProperty codigo_rol;
     private StringProperty nit_empresa;
-    private IntegerProperty id_pos;
-    private IntegerProperty id_sede;
     private StringProperty nombre;
     private StringProperty apellido;
     private StringProperty telefono;
     private StringProperty correo;
     private StringProperty contrasena;
+    private IntegerProperty id_pos;
+    private IntegerProperty id_sede;
     private static Users usuarios;
 
     public Users(String cedula, String num_nomina, String id_estado, String codigo_rol, String nit_empresa,
@@ -30,13 +30,13 @@ public class Users {
         this.id_estado = new SimpleStringProperty(id_estado);
         this.codigo_rol = new SimpleStringProperty(codigo_rol);
         this.nit_empresa = new SimpleStringProperty(nit_empresa);
-        this.id_pos = new SimpleIntegerProperty(id_pos);
-        this.id_sede = new SimpleIntegerProperty(id_sede);
         this.nombre = new SimpleStringProperty(nombre);
         this.apellido = new SimpleStringProperty(apellido);
         this.telefono = new SimpleStringProperty(telefono);
         this.correo = new SimpleStringProperty(correo);
         this.contrasena = new SimpleStringProperty(contrasena);
+        this.id_pos = new SimpleIntegerProperty(id_pos);
+        this.id_sede = new SimpleIntegerProperty(id_sede);
 
     }
 
