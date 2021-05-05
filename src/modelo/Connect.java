@@ -28,8 +28,22 @@ public class Connect {
     }
 
     //Para guardar datos
-    public int GUARDAR(String sql) throws SQLException {
-        return st.executeUpdate(sql);
+    public boolean GUARDAR(String sql) {
+        try {
+            if(st.executeUpdate(sql)>0){
+                System.out.println("Se ejecutó el query->"+sql);
+                return true;
+            }
+            else{
+                System.out.println("No se ejecutó el query->"+sql);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null,ex);
+        }
+        finally {
+            CERRAR();
+        }
+        return false;
     }
 
     //para cerrar la conexión

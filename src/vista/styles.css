@@ -22,3 +22,7 @@
     -fx-font-size: 14px;
      -fx-font-family: "Arial";
 }
+
+#iconoRegistro{
+    -fx-image: url("/Images/registro.png");
+}

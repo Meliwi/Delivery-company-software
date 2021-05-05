@@ -43,10 +43,12 @@ public class LoginController implements Initializable {
                     "AND contrasena = '"+contrasena.getText().trim()+"';");
             if(resultado.next()){
                 Parent root = FXMLLoader.load(getClass().getResource("/vista/modules.fxml"));
-                Stage modulesStage = ((Stage)(((Button)event.getSource()).getScene().getWindow()));//new Stage();
+                Stage modulesStage = ((Stage)(((Button)event.getSource()).getScene().getWindow()));
                 modulesStage.setTitle("Gestión de módulos");
                 modulesStage.setScene(new Scene(root, 900, 600));
                 modulesStage.show();
+                //para cerrar la conexión de la base de datos
+                con.CERRAR();
             }
             else {
                 UsuarioInvalido.setText("Los datos son incorrectos");
