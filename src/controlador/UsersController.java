@@ -1,22 +1,19 @@
 package controlador;
 
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import modelo.Connect;
-
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class UsersController implements Initializable {
@@ -44,10 +41,7 @@ public class UsersController implements Initializable {
     @FXML
     private Label mensaje;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle){
 
-    }
 
     @FXML
     private void crearButtonAction (ActionEvent event) throws IOException {
@@ -65,6 +59,7 @@ public class UsersController implements Initializable {
         String contrasenaUsuario = contrasena.getText().trim();
         int idSedeUsuario = Integer.parseInt(idSede.getText().trim());
         int idPosUsuario = Integer.parseInt(idPos.getText().trim());
+
         Connect con  = new Connect();
 
         try {
@@ -113,6 +108,96 @@ public class UsersController implements Initializable {
         modulesStage.setTitle("Gestión de módulos");
         modulesStage.setScene(new Scene(root, 900, 600));
         modulesStage.show();
+    }
+    public void ConsultarBotonAction(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/vista/readUsers.fxml"));
+        Stage TableUserStage = ((Stage)(((Button)event.getSource()).getScene().getWindow()));
+        TableUserStage.setTitle("Consulta de Usuarios");
+        TableUserStage.setScene(new Scene(root, 900, 600));
+        TableUserStage.show();
+    }
+    public void editarButtonAction(ActionEvent event) throws IOException {
+
+        Connect con  = new Connect();
+        if(cedula.getText().trim().isEmpty()){
+            mensaje.setText("Porfavor ingrese la cédula del usuario");
+        }
+        else{
+            if(!nombre.getText().trim().isEmpty()){
+                con.GUARDAR("UPDATE usuarios SET nombre = '"+nombre.getText().trim()+"'" +
+                        "WHERE cedula = '"+cedula.getText().trim()+"'");
+            }
+            if(!apellido.getText().trim().isEmpty()){
+                con.GUARDAR("UPDATE usuarios SET apellido = '"+apellido.getText().trim()+"'" +
+                        "WHERE cedula = '"+cedula.getText().trim()+"'");
+            }
+            if(!telefono.getText().trim().isEmpty()){
+                con.GUARDAR("UPDATE usuarios SET telefono = '"+telefono.getText().trim()+"'" +
+                        "WHERE cedula = '"+cedula.getText().trim()+"'");
+            }
+            if(!rol.getText().trim().isEmpty()){
+                con.GUARDAR("UPDATE usuarios SET codigo_rol = '"+rol.getText().trim()+"'" +
+                        "WHERE cedula = '"+cedula.getText().trim()+"'");
+            }
+            if(!numNomina.getText().trim().isEmpty()){
+                con.GUARDAR("UPDATE usuarios SET num_nomina = '"+numNomina.getText().trim()+"'" +
+                        "WHERE cedula = '"+cedula.getText().trim()+"'");
+            }
+            if(!correo.getText().trim().isEmpty()){
+                con.GUARDAR("UPDATE usuarios SET correo= '"+correo.getText().trim()+"'" +
+                        "WHERE cedula = '"+cedula.getText().trim()+"'");
+            }
+            if(!contrasena.getText().trim().isEmpty()){
+                con.GUARDAR("UPDATE usuarios SET contrasena = '"+contrasena.getText().trim()+"'" +
+                        "WHERE cedula = '"+cedula.getText().trim()+"'");
+            }
+            if(!idSede.getText().trim().isEmpty()){
+                con.GUARDAR("UPDATE usuarios SET id_sede = '"+idSede.getText().trim()+"'" +
+                        "WHERE cedula = '"+cedula.getText().trim()+"'");
+            }
+            if(!idPos.getText().trim().isEmpty()){
+                con.GUARDAR("UPDATE usuarios SET id_pos = '"+idPos.getText().trim()+"'" +
+                        "WHERE cedula = '"+cedula.getText().trim()+"'");
+            }
+            cedula.setText(null);
+            nombre.setText(null);
+            apellido.setText(null);
+            telefono.setText(null);
+            rol.setText(null);
+            numNomina.setText(null);
+            correo.setText(null);
+            contrasena.setText(null);
+            idSede.setText(null);
+            idPos.setText(null);
+            Parent root = FXMLLoader.load(getClass().getResource("/vista/updateUserWindow.fxml"));
+            Stage actualizacionStage = new Stage();
+            actualizacionStage.setTitle("Actualización");
+            actualizacionStage.setScene(new Scene(root, 458, 100));
+            actualizacionStage.show();
+            con.CERRAR();
+        }
+    }
+    public void borrarButtonAction(ActionEvent event) throws IOException {
+        Connect con  = new Connect();
+        if(cedula.getText().trim().isEmpty()){
+            mensaje.setText("Porfavor ingrese la cédula del usuario");
+        }
+        else{
+            con.GUARDAR("UPDATE usuarios SET id_estado = '2' WHERE cedula = '"+cedula.getText().trim()+"'");
+            cedula.setText(null);
+            Parent root = FXMLLoader.load(getClass().getResource("/vista/deleteUserWindow.fxml"));
+            Stage borrarStage = new Stage();
+            borrarStage.setTitle("Desactivación");
+            borrarStage.setScene(new Scene(root, 458, 100));
+            borrarStage.show();
+            con.CERRAR();
+        }
+
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle){
+
     }
 
 }
