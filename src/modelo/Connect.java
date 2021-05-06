@@ -40,9 +40,6 @@ public class Connect {
         } catch (SQLException ex) {
             Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null,ex);
         }
-        finally {
-            CERRAR();
-        }
         return false;
     }
 
