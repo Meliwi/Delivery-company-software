@@ -22,7 +22,7 @@
         </AnchorPane>
         -->
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="/vista/login.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.LoginController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="/vista/styles.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.OfficesManagement">
     <children>
         <Pane prefHeight="600.0" prefWidth="458.0">
             <children>
@@ -35,41 +35,37 @@
                                 <Font name="Franklin Gothic Heavy" size="32.0" />
                             </font>
                         </Label>
-                        <TextField id="correo" layoutX="120.0" layoutY="118.0" promptText="ID Sede">
+                        <TextField fx:id="nit_empresa" layoutX="120.0" layoutY="118.0" promptText="Nit. Empresa">
                             <font>
                                 <Font name="Arial" size="14.0" />
                             </font>
                         </TextField>
-                  <TextField id="correo" layoutX="120.0" layoutY="162.0" promptText="Ciudad">
+                  <TextField fx:id="ciudad" layoutX="120.0" layoutY="162.0" promptText="Ciudad">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
                   </TextField>
-                        <Button fx:id="loginbutton" layoutX="169.0" layoutY="303.0" mnemonicParsing="false" onAction="#loginButtonAction" style="-fx-background-color: #006ee1;" text="EDITAR" textAlignment="CENTER" textFill="WHITE">
+                        <Button fx:id="editarButton" layoutX="169.0" layoutY="303.0" mnemonicParsing="false"  style="-fx-background-color: #006ee1;" text="EDITAR" textAlignment="CENTER" textFill="WHITE">
                             <font>
                                 <Font name="Arial" size="12.0" />
                             </font>
                         </Button>
-                        <ImageView fx:id="iconoContra" fitHeight="23.0" fitWidth="21.0" layoutX="88.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true">
-                        </ImageView>
-                        <ImageView fx:id="iconoUsuario" fitHeight="23.0" fitWidth="21.0" layoutX="88.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true">
-                        </ImageView>
-                  <TextField id="correo" layoutX="120.0" layoutY="206.0" promptText="Dirección">
+                  <TextField fx:id="direccion" layoutX="120.0" layoutY="206.0" promptText="Dirección">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
                   </TextField>
-                  <TextField id="correo" layoutX="120.0" layoutY="250.0" promptText="Teléfono">
+                  <TextField fx:id="telefono" layoutX="120.0" layoutY="250.0" promptText="Teléfono">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
                   </TextField>
-                  <Button fx:id="loginbutton1" layoutX="91.0" layoutY="303.0" mnemonicParsing="false" onAction="#loginButtonAction" style="-fx-background-color: #006ee1;" text="CREAR" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="crearButton" layoutX="91.0" layoutY="303.0" mnemonicParsing="false" onAction="#crearButtonAction" style="-fx-background-color: #006ee1;" text="CREAR" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font>
                   </Button>
-                  <Button fx:id="loginbutton2" layoutX="247.0" layoutY="303.0" mnemonicParsing="false" onAction="#loginButtonAction" style="-fx-background-color: #006ee1;" text="BORRAR" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="borrarButton" layoutX="247.0" layoutY="303.0" mnemonicParsing="false" style="-fx-background-color: #006ee1;" text="BORRAR" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font>
@@ -80,7 +76,7 @@
         </Pane>
       <Pane prefHeight="600.0" prefWidth="442.0">
          <children>
-             <Button fx:id="ModulosBoton" layoutX="233.0" layoutY="14.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="77.0" style="-fx-background-color: #006ee1;" text="MÓDULOS" textAlignment="CENTER" textFill="WHITE">
+             <Button fx:id="ModulosBoton" onAction="#ModulosBotonAction" layoutX="233.0" layoutY="14.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="77.0" style="-fx-background-color: #006ee1;" text="MÓDULOS" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Arial" size="12.0" />
                </font>
