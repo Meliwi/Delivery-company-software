@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<!--
+        <?xml version="1.0" encoding="UTF-8"?>
+
+        <?import java.lang.*?>
+        <?import java.util.*?>
+        <?import javafx.scene.*?>
+        <?import javafx.scene.control.*?>
+        <?import javafx.scene.layout.*?>
+
+        <AnchorPane xmlns="http://javafx.com/javafx"
+                    xmlns:fx="http://javafx.com/fxml"
+                    fx:controller="vista.OfficesManagement"
+                    prefHeight="400.0" prefWidth="600.0">
+
+        </AnchorPane>
+        -->
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="/vista/styles.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.OfficesManagement">
+    <children>
+        <Pane prefHeight="600.0" prefWidth="458.0">
+            <children>
+                <ImageView fx:id="panelFondo" fitHeight="600.0" fitWidth="458.0" pickOnBounds="true" preserveRatio="true">
+                </ImageView>
+                <Pane fx:id="panelForm" layoutX="255.0" layoutY="111.0" minWidth="300.0" prefHeight="380.0" prefWidth="410.0" style="-fx-background-color: white;">
+                    <children>
+                        <Label layoutX="71.0" layoutY="61.0" prefHeight="41.0" prefWidth="268.0" text="Gestión de Sedes" textAlignment="CENTER" textFill="#006ee1">
+                            <font>
+                                <Font name="Franklin Gothic Heavy" size="32.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="id_sede" layoutX="120.0" layoutY="118.0" promptText="Nombre sede">
+                            <font>
+                                <Font name="Arial" size="14.0" />
+                            </font>
+                        </TextField>
+                  <TextField fx:id="ciudad" layoutX="120.0" layoutY="162.0" promptText="Ciudad">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </TextField>
+
+                  <TextField fx:id="direccion" layoutX="120.0" layoutY="206.0" promptText="Dirección">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="telefono" layoutX="120.0" layoutY="250.0" promptText="Teléfono">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </TextField>
+                  <Button fx:id="editarButton" layoutX="169.0" layoutY="303.0" mnemonicParsing="false" onAction="#editarButtonAction" style="-fx-background-color: #006ee1;" text="EDITAR" textAlignment="CENTER" textFill="WHITE">
+                        <font>
+                            <Font name="Arial" size="12.0" />
+                        </font>
+                  </Button>
+                  <Button fx:id="crearButton" layoutX="91.0" layoutY="303.0" mnemonicParsing="false" onAction="#crearButtonAction" style="-fx-background-color: #006ee1;" text="CREAR" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="borrarButton" layoutX="247.0" layoutY="303.0" mnemonicParsing="false" style="-fx-background-color: #006ee1;" text="BORRAR" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                  </Button>
+                   <Label fx:id="mensaje" alignment="CENTER" layoutX="81.0" layoutY="337.0" prefHeight="17.0" prefWidth="249.0" textFill="#ff2f2f">
+                       <font>
+                           <Font name="Arial" size="14.0" />
+                       </font>
+                   </Label>
+                    </children>
+                </Pane>
+            </children>
+        </Pane>
+      <Pane prefHeight="600.0" prefWidth="442.0">
+         <children>
+             <Button fx:id="ModulosBoton" layoutX="233.0" layoutY="14.0" mnemonicParsing="false" onAction="#ModulosBotonAction" prefHeight="33.0" prefWidth="77.0" style="-fx-background-color: #006ee1;" text="MÓDULOS" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Button>
+             <Button fx:id="ConsultarBoton" layoutX="321.0" layoutY="14.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="96.0" style="-fx-background-color: #3964B3;" text="CONSULTAR" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+    </children>
+</HBox>
