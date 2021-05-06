@@ -71,6 +71,11 @@
                         <Font name="Arial" size="12.0" />
                      </font>
                   </Button>
+                   <Label fx:id="mensaje" alignment="CENTER" layoutX="81.0" layoutY="337.0" prefHeight="17.0" prefWidth="249.0" textFill="#ff2f2f">
+                       <font>
+                           <Font name="Arial" size="14.0" />
+                       </font>
+                   </Label>
                     </children>
                 </Pane>
             </children>
@@ -87,11 +92,6 @@
                   <Font name="Arial" size="12.0" />
                </font>
             </Button>
-             <Label fx:id="mensaje" alignment="CENTER" layoutX="-124.0" layoutY="452.0" prefHeight="17.0" prefWidth="249.0" textFill="#ff2f2f">
-                 <font>
-                     <Font name="Arial" size="14.0" />
-                 </font>
-             </Label>
          </children>
       </Pane>
     </children>
