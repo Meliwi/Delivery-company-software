@@ -37,7 +37,7 @@ public class ModulesController implements Initializable {
     public void usuariosControlBoton(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/vista/officesManagement.fxml"));
         Stage UserStage = ((Stage)(((Button)event.getSource()).getScene().getWindow()));
-        UserStage.setTitle("Gestión de Usuarios");
+        UserStage.setTitle("Gestión de Sedes");
         UserStage.setScene(new Scene(root, 900, 600));
         UserStage.show();
     }

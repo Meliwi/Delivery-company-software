@@ -35,7 +35,7 @@
                                 <Font name="Franklin Gothic Heavy" size="32.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="nit_empresa" layoutX="120.0" layoutY="118.0" promptText="Nit. Empresa">
+                        <TextField fx:id="id_sede" layoutX="120.0" layoutY="118.0" promptText="Nombre sede">
                             <font>
                                 <Font name="Arial" size="14.0" />
                             </font>
@@ -45,11 +45,7 @@
                         <Font name="Arial" size="14.0" />
                      </font>
                   </TextField>
-                        <Button fx:id="editarButton" layoutX="169.0" layoutY="303.0" mnemonicParsing="false"  style="-fx-background-color: #006ee1;" text="EDITAR" textAlignment="CENTER" textFill="WHITE">
-                            <font>
-                                <Font name="Arial" size="12.0" />
-                            </font>
-                        </Button>
+
                   <TextField fx:id="direccion" layoutX="120.0" layoutY="206.0" promptText="Dirección">
                      <font>
                         <Font name="Arial" size="14.0" />
@@ -60,6 +56,11 @@
                         <Font name="Arial" size="14.0" />
                      </font>
                   </TextField>
+                  <Button fx:id="editarButton" layoutX="169.0" layoutY="303.0" mnemonicParsing="false" onAction="#editarButtonAction" style="-fx-background-color: #006ee1;" text="EDITAR" textAlignment="CENTER" textFill="WHITE">
+                        <font>
+                            <Font name="Arial" size="12.0" />
+                        </font>
+                  </Button>
                   <Button fx:id="crearButton" layoutX="91.0" layoutY="303.0" mnemonicParsing="false" onAction="#crearButtonAction" style="-fx-background-color: #006ee1;" text="CREAR" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Arial" size="12.0" />
