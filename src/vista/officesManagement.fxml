@@ -77,7 +77,7 @@
         </Pane>
       <Pane prefHeight="600.0" prefWidth="442.0">
          <children>
-             <Button fx:id="ModulosBoton" onAction="#ModulosBotonAction" layoutX="233.0" layoutY="14.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="77.0" style="-fx-background-color: #006ee1;" text="MÓDULOS" textAlignment="CENTER" textFill="WHITE">
+             <Button fx:id="ModulosBoton" layoutX="233.0" layoutY="14.0" mnemonicParsing="false" onAction="#ModulosBotonAction" prefHeight="33.0" prefWidth="77.0" style="-fx-background-color: #006ee1;" text="MÓDULOS" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Arial" size="12.0" />
                </font>
@@ -87,7 +87,7 @@
                   <Font name="Arial" size="12.0" />
                </font>
             </Button>
-             <Label fx:id="mensaje" alignment="CENTER" layoutX="100.0" layoutY="438.0" prefHeight="17.0" prefWidth="249.0" textFill="#ff2f2f">
+             <Label fx:id="mensaje" alignment="CENTER" layoutX="-124.0" layoutY="452.0" prefHeight="17.0" prefWidth="249.0" textFill="#ff2f2f">
                  <font>
                      <Font name="Arial" size="14.0" />
                  </font>
