@@ -1,20 +1,20 @@
 package controlador;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import modelo.Connect;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.net.URL;
 
@@ -27,6 +27,18 @@ public class LoginController implements Initializable {
     private PasswordField contrasena;
     @FXML
     private Label UsuarioInvalido;
+    @FXML
+    private static String userRole;
+
+
+    public static String getUserRole() {
+        return userRole;
+    }
+
+    public static void setUserRole(String userRole) {
+        LoginController.userRole = userRole;
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
@@ -37,10 +49,11 @@ public class LoginController implements Initializable {
         //conexión a base de datos
         Connect con  = new Connect();
         try{
-            //En resultado se guarda la consulta de buscar lo que el usuario ingreso en la base de datos
-            ResultSet resultado = con.CONSULTAR("SELECT * FROM usuarios WHERE correo = '"+correo.getText().trim()+"'" +
+            //En resultado se guarda la consulta de buscar lo que el usuario ingreso, en la base de datos
+            ResultSet resultado = con.CONSULTAR("SELECT * FROM usuarios WHERE correo = '"+correo.getText().trim()+"' " +
                     "AND contrasena = '"+contrasena.getText().trim()+"';");
             if(resultado.next()){
+                userRole = resultado.getString(4);
                 Parent root = FXMLLoader.load(getClass().getResource("/vista/modules.fxml"));
                 Stage modulesStage = ((Stage)(((Button)event.getSource()).getScene().getWindow()));
                 modulesStage.setTitle("Gestión de módulos");
@@ -59,4 +72,6 @@ public class LoginController implements Initializable {
         }
 
     }
+
+
 }

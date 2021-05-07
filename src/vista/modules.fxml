@@ -28,27 +28,33 @@
                         <Font name="Arial" size="14.0" />
                      </font>
                   </Label>
-                  <Button fx:id="ContinuarBoton" layoutX="100.0" layoutY="280.0" mnemonicParsing="false" onAction="#usuariosControlBoton" prefHeight="23.0" prefWidth="103.0" style="-fx-background-color: #006ee1;" text="CONTINUAR" textAlignment="CENTER" textFill="WHITE">
-                     <font>
-                        <Font name="Arial" size="12.0" />
-                     </font>
-                  </Button>
-                  <ComboBox fx:id="dropCascade" accessibleText="Hola" layoutX="99.0" layoutY="170.0" opacity="0.58" prefHeight="41.0" prefWidth="213.0" promptText="Seleccione una opcion">
+
+                  <ComboBox fx:id="comboBox" layoutX="99.0" layoutY="170.0" opacity="0.58" prefHeight="41.0" prefWidth="213.0" promptText="Seleccione una opcion">
                      <items>
                         <FXCollections fx:id="modulosListado" fx:factory="observableArrayList">
                            <String fx:id="sedes" fx:value="Sedes" />
                            <String fx:id="usuarios" fx:value="Usuarios" />
                            <String fx:id="pos" fx:value="POS" />
-                           <String fx:id="nomina" fx:value="Nómina" />
+                           <String fx:id="nomina" fx:value="Nomina" />
                            <String fx:id="reportes" fx:value="Reportes" />
                         </FXCollections>
                      </items>
                   </ComboBox>
-                  <Button fx:id="RegresarBoton" layoutX="212.0" layoutY="280.0" mnemonicParsing="false"  onAction="#RegresarControlBoton" prefHeight="23.0" prefWidth="97.0" style="-fx-background-color: #006ee1;" text="REGRESAR" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="ContinuarBoton" layoutX="99.0" layoutY="280.0" mnemonicParsing="false" onAction="#ContinuarControlBoton" prefHeight="23.0" prefWidth="97.0" style="-fx-background-color: #006ee1;" text="CONTINUAR" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font>
                   </Button>
+                  <Button fx:id="RegresarBoton1" layoutX="215.0" layoutY="280.0" mnemonicParsing="false" onAction="#RegresarControlBoton" prefHeight="23.0" prefWidth="97.0" style="-fx-background-color: #006ee1;" text="REGRESAR" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="mensaje" alignment="CENTER" layoutX="53.0" layoutY="237.0" prefHeight="17.0" prefWidth="307.0" textAlignment="CENTER" textFill="#ff2323">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
          </children>

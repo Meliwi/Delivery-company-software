@@ -14,6 +14,8 @@ import javafx.stage.Stage;
 import modelo.Connect;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class UsersController implements Initializable {
@@ -40,6 +42,8 @@ public class UsersController implements Initializable {
     private TextField contrasena;
     @FXML
     private Label mensaje;
+    @FXML
+    private Label mensajeAlert;
 
 
 
@@ -57,8 +61,8 @@ public class UsersController implements Initializable {
         String numNominaUsuario = numNomina.getText().trim();
         String correoUsuario = correo.getText().trim();
         String contrasenaUsuario = contrasena.getText().trim();
-        int idSedeUsuario = Integer.parseInt(idSede.getText().trim());
-        int idPosUsuario = Integer.parseInt(idPos.getText().trim());
+        String idSedeUsuario = idSede.getText().trim();
+        String idPosUsuario = idPos.getText().trim();
 
         Connect con  = new Connect();
 
@@ -67,16 +71,16 @@ public class UsersController implements Initializable {
                     "VALUES ('"+cedulaUsuario+"','"+numNominaUsuario+"','"+idEstado+"','"+rolUsuario+"','"+nitEmpresa+"','"+idPosUsuario+"','"+idSedeUsuario+"','"+nombreUsuario+"','"+apellidoUsuario+"','"+telefonoUsuario+"','"+correoUsuario+"','"+contrasenaUsuario+"')";
 
             if (con.GUARDAR(creacion)) {
-                cedula.setText(null);
-                nombre.setText(null);
-                apellido.setText(null);
-                telefono.setText(null);
-                rol.setText(null);
-                numNomina.setText(null);
-                correo.setText(null);
-                contrasena.setText(null);
-                idSede.setText(null);
-                idPos.setText(null);
+                cedula.setText("");
+                nombre.setText("");
+                apellido.setText("");
+                telefono.setText("");
+                rol.setText("");
+                numNomina.setText("");
+                correo.setText("");
+                contrasena.setText("");
+                idSede.setText("");
+                idPos.setText("");
                 Parent root = FXMLLoader.load(getClass().getResource("/vista/popupWindow.fxml"));
                 Stage registroStage = new Stage();
                 registroStage.setTitle("Registro");
@@ -116,7 +120,7 @@ public class UsersController implements Initializable {
         TableUserStage.setScene(new Scene(root, 900, 600));
         TableUserStage.show();
     }
-    public void editarButtonAction(ActionEvent event) throws IOException {
+    public void editarButtonAction(ActionEvent event) throws IOException, SQLException {
 
         Connect con  = new Connect();
         if(cedula.getText().trim().isEmpty()){
@@ -159,22 +163,31 @@ public class UsersController implements Initializable {
                 con.GUARDAR("UPDATE usuarios SET id_pos = '"+idPos.getText().trim()+"'" +
                         "WHERE cedula = '"+cedula.getText().trim()+"'");
             }
-            cedula.setText(null);
-            nombre.setText(null);
-            apellido.setText(null);
-            telefono.setText(null);
-            rol.setText(null);
-            numNomina.setText(null);
-            correo.setText(null);
-            contrasena.setText(null);
-            idSede.setText(null);
-            idPos.setText(null);
-            Parent root = FXMLLoader.load(getClass().getResource("/vista/updateUserWindow.fxml"));
-            Stage actualizacionStage = new Stage();
-            actualizacionStage.setTitle("Actualización");
-            actualizacionStage.setScene(new Scene(root, 458, 100));
-            actualizacionStage.show();
-            con.CERRAR();
+            if(!cedula.getText().trim().isEmpty()){
+                ResultSet resultado = con.CONSULTAR("SELECT * FROM usuarios WHERE cedula = '"+cedula.getText().trim()+"';");
+                if(!resultado.next()){
+                    mensaje.setText("Porfavor ingrese una cédula válida");
+                }
+                else{
+                    cedula.setText("");
+                    nombre.setText("");
+                    apellido.setText("");
+                    telefono.setText("");
+                    rol.setText("");
+                    numNomina.setText("");
+                    correo.setText("");
+                    contrasena.setText("");
+                    idSede.setText("");
+                    idPos.setText("");
+                    Parent root = FXMLLoader.load(getClass().getResource("/vista/updateUserWindow.fxml"));
+                    Stage actualizacionStage = new Stage();
+                    actualizacionStage.setTitle("Actualización");
+                    actualizacionStage.setScene(new Scene(root, 458, 100));
+                    actualizacionStage.show();
+                    con.CERRAR();
+                }
+            }
+
         }
     }
     public void borrarButtonAction(ActionEvent event) throws IOException {
