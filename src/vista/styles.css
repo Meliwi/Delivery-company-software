@@ -18,7 +18,7 @@
     -fx-image: url("/Images/lock.png");
 }
 
-#dropCascade{
+#comboBox{
     -fx-font-size: 14px;
      -fx-font-family: "Arial";
 }
