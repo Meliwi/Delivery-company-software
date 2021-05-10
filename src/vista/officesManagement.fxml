@@ -39,7 +39,7 @@
                                     <Font name="Arial" size="12.0" />
                                  </font>
                               </Button>
-                               <Button fx:id="ConsultarBoton" layoutX="321.0" layoutY="14.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="96.0" style="-fx-background-color: #3964B3;" text="CONSULTAR" textAlignment="CENTER" textFill="WHITE">
+                               <Button fx:id="ConsultarBoton" layoutX="321.0" layoutY="14.0" mnemonicParsing="false" onAction="#ConsultarBotonAction" prefHeight="33.0" prefWidth="96.0" style="-fx-background-color: #3964B3;" text="CONSULTAR" textAlignment="CENTER" textFill="WHITE">
                                  <font>
                                     <Font name="Arial" size="12.0" />
                                  </font>
