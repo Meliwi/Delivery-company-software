@@ -4,13 +4,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="/vista/login.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.LoginController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="/vista/styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.LoginController">
     <children>
         <Pane prefHeight="600.0" prefWidth="458.0">
             <children>
@@ -18,22 +17,22 @@
                 </ImageView>
                 <Pane fx:id="panelForm" layoutX="255.0" layoutY="111.0" minWidth="300.0" prefHeight="380.0" prefWidth="410.0" style="-fx-background-color: white;">
                     <children>
-                        <Label layoutX="115.0" layoutY="74.0" prefHeight="41.0" prefWidth="180.0" text="Bienvenido" textAlignment="CENTER" textFill="#006ee1">
+                        <Label layoutX="117.0" layoutY="74.0" prefHeight="41.0" prefWidth="180.0" text="Bienvenido" textAlignment="CENTER" textFill="#006ee1">
                             <font>
                                 <Font name="Franklin Gothic Heavy" size="32.0" />
                             </font>
                         </Label>
-                        <Label layoutX="115.0" layoutY="115.0" prefHeight="17.0" prefWidth="180.0" text="Inicia sesión para continuar" textFill="#c7c7c7">
+                        <Label layoutX="117.0" layoutY="115.0" prefHeight="17.0" prefWidth="180.0" text="Inicia sesión para continuar" textFill="#c7c7c7">
                             <font>
                                 <Font name="Arial" size="14.0" />
                             </font>
                         </Label>
-                        <TextField id="correo" layoutX="120.0" layoutY="164.0" promptText="Correo">
+                        <TextField fx:id="correo" layoutX="120.0" layoutY="164.0" promptText="Correo">
                             <font>
                                 <Font name="Arial" size="14.0" />
                             </font>
                         </TextField>
-                        <PasswordField id="contraseña" layoutX="120.0" layoutY="212.0" promptText="Contraseña">
+                        <PasswordField fx:id="contrasena" layoutX="120.0" layoutY="212.0" promptText="Contraseña">
                             <font>
                                 <Font name="Arial" size="14.0" />
                             </font>
@@ -43,10 +42,15 @@
                                 <Font name="Arial" size="12.0" />
                             </font>
                         </Button>
-                  <ImageView fx:id = "iconoContra" fitHeight="23.0" fitWidth="21.0" layoutX="88.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="iconoContra" fitHeight="23.0" fitWidth="21.0" layoutX="88.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true">
                   </ImageView>
                   <ImageView fx:id="iconoUsuario" fitHeight="23.0" fitWidth="21.0" layoutX="88.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true">
                   </ImageView>
+                  <Label fx:id="UsuarioInvalido" layoutX="126.0" layoutY="254.0" prefHeight="17.0" prefWidth="180.0" textAlignment="RIGHT" textFill="#f02849">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </Label>
                     </children>
                 </Pane>
             </children>
