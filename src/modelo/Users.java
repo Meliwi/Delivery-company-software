@@ -34,87 +34,77 @@ public class Users {
         this.nombre_estado = new SimpleStringProperty(nombre_estado);
     }
 
+
+    //getters
     public String getCedula() {
         return cedula.get();
     }
-    public void setCedula(String cedula) {
-        this.cedula.set(cedula);
-    }
-    public StringProperty cedulaProperty() {
-        return cedula;
-    }
-
     public String getNombre() {
         return nombre.get();
     }
-
-    public StringProperty nombreProperty() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre.set(nombre);
-    }
-
     public String getApellido() {
         return apellido.get();
     }
-
-    public StringProperty apellidoProperty() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido.set(apellido);
-    }
-
     public String getTelefono() {
         return telefono.get();
     }
-
-    public StringProperty telefonoProperty() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono.set(telefono);
-    }
-
     public String getCorreo() {
         return correo.get();
     }
-
-    public StringProperty correoProperty() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo.set(correo);
-    }
-
     public String getNombre_rol() {
         return nombre_rol.get();
     }
-
-    public StringProperty nombre_rolProperty() {
-        return nombre_rol;
-    }
-
-    public void setNombre_rol(String nombre_rol) {
-        this.nombre_rol.set(nombre_rol);
-    }
-
     public String getNombre_estado() {
         return nombre_estado.get();
     }
 
+    //setters
+    public void setCedula(String cedula) {
+        this.cedula.set(cedula);
+    }
+    public void setNombre(String nombre) {
+        this.nombre.set(nombre);
+    }
+    public void setApellido(String apellido) {
+        this.apellido.set(apellido);
+    }
+    public void setTelefono(String telefono) {
+        this.telefono.set(telefono);
+    }
+    public void setCorreo(String correo) {
+        this.correo.set(correo);
+    }
+    public void setNombre_rol(String nombre_rol) {
+        this.nombre_rol.set(nombre_rol);
+    }
+    public void setNombre_estado(String nombre_estado) {
+        this.nombre_estado.set(nombre_estado);
+    }
+
+
+    //property
+    public StringProperty cedulaProperty() {
+        return cedula;
+    }
+    public StringProperty nombreProperty() {
+        return nombre;
+    }
+    public StringProperty apellidoProperty() {
+        return apellido;
+    }
+    public StringProperty telefonoProperty() {
+        return telefono;
+    }
+    public StringProperty correoProperty() {
+        return correo;
+    }
+    public StringProperty nombre_rolProperty() {
+        return nombre_rol;
+    }
     public StringProperty nombre_estadoProperty() {
         return nombre_estado;
     }
 
-    public void setNombre_estado(String nombre_estado) {
-        this.nombre_estado.set(nombre_estado);
-    }
 
     public static ObservableList<Users> fillTableUsers() {
         Connect con  = new Connect();

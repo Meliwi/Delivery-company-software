@@ -14,11 +14,11 @@
       <TableView fx:id="tableUsers" layoutX="19.0" layoutY="141.0" prefHeight="319.0" prefWidth="863.0">
         <columns>
           <TableColumn fx:id="cedulaColumn" prefWidth="119.0" text="Cédula" />
-          <TableColumn fx:id="nombreColumn" prefWidth="160.0" text="nombre" />
-            <TableColumn fx:id="apellidoColumn" prefWidth="94.0" text="Apellido " />
-            <TableColumn fx:id="telefonoColumn" prefWidth="108.0" text="Teléfono" />
-            <TableColumn fx:id="correoColumn" prefWidth="198.0" text="Correo" />
-            <TableColumn fx:id="rolColumn" prefWidth="108.0" text="Rol" />
+          <TableColumn fx:id="nombreColumn" prefWidth="100.0" text="nombre" />
+            <TableColumn fx:id="apellidoColumn" prefWidth="100.0" text="Apellido " />
+            <TableColumn fx:id="telefonoColumn" prefWidth="128.0" text="Teléfono" />
+            <TableColumn fx:id="correoColumn" prefWidth="210.0" text="Correo" />
+            <TableColumn fx:id="rolColumn" prefWidth="128.0" text="Rol" />
             <TableColumn fx:id="estadoColumn" prefWidth="75.0" text="Estado" />
         </columns>
       </TableView>
