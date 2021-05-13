@@ -33,6 +33,24 @@ public class OfficesManagement implements Initializable {
     }
 
     @FXML
+    private void ModulosBotonAction(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/vista/modules.fxml"));
+        Stage modulesStage = ((Stage)(((Button)event.getSource()).getScene().getWindow()));//new Stage();
+        modulesStage.setTitle("Gestión de módulos");
+        modulesStage.setScene(new Scene(root, 900, 600));
+        modulesStage.show();
+    }
+
+    @FXML
+    public void ConsultarBotonAction(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/vista/readSedes.fxml"));
+        Stage TableUserStage = ((Stage)(((Button)event.getSource()).getScene().getWindow()));
+        TableUserStage.setTitle("Consulta de Usuarios");
+        TableUserStage.setScene(new Scene(root, 900, 600));
+        TableUserStage.show();
+    }
+
+    @FXML
     private void crearButtonAction (ActionEvent event) throws IOException {
         String nit = "890399001";
         String name = id_sede.getText().trim();
@@ -72,14 +90,7 @@ public class OfficesManagement implements Initializable {
         ((Stage)(((Button)actionEvent.getSource()).getScene().getWindow())).close();
     }
 
-    @FXML
-    private void ModulosBotonAction(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/vista/modules.fxml"));
-        Stage modulesStage = ((Stage)(((Button)event.getSource()).getScene().getWindow()));//new Stage();
-        modulesStage.setTitle("Gestión de módulos");
-        modulesStage.setScene(new Scene(root, 900, 600));
-        modulesStage.show();
-    }
+
 
     @FXML
     private void editarButtonAction (ActionEvent event) throws IOException {
@@ -122,4 +133,5 @@ public class OfficesManagement implements Initializable {
             throwables.printStackTrace();
         }
     }
+
 }

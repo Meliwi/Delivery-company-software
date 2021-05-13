@@ -60,7 +60,11 @@ public class ModulesController implements Initializable {
         }
         if(controlador.LoginController.getUserRole().equals("2")){
             if(comboBox.getSelectionModel().getSelectedItem().equals("POS")){
-                mensaje.setText("Este módulo aún se encuentra en desarrollo");
+                Parent root = FXMLLoader.load(getClass().getResource("/vista/clients.fxml"));
+                Stage clientsStage = ((Stage)(((Button)event.getSource()).getScene().getWindow()));
+                clientsStage.setTitle("Gestión de clientes");
+                clientsStage.setScene(new Scene(root, 900, 600));
+                clientsStage.show();
             }
             else{
                 mensaje.setText("Acceso Denegado");
