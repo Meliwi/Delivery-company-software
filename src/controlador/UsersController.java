@@ -67,7 +67,7 @@ public class UsersController implements Initializable {
         Connect con  = new Connect();
 
         try {
-            String creacion = "INSERT INTO usuarios (cedula, num_nomina, id_estado, codigo_rol, nit_empresa, id_pos, id_sede , nombre, apellido, telefono,correo, contrasena)"+
+            String creacion = "INSERT INTO usuarios (cedula, num_nomina, id_estado, codigo_rol, nit_empresa, identificador_pos, id_sede , nombre, apellido, telefono,correo, contrasena)"+
                     "VALUES ('"+cedulaUsuario+"','"+numNominaUsuario+"','"+idEstado+"','"+rolUsuario+"','"+nitEmpresa+"','"+idPosUsuario+"','"+idSedeUsuario+"','"+nombreUsuario+"','"+apellidoUsuario+"','"+telefonoUsuario+"','"+correoUsuario+"','"+contrasenaUsuario+"')";
 
             if (con.GUARDAR(creacion)) {
@@ -160,7 +160,7 @@ public class UsersController implements Initializable {
                         "WHERE cedula = '"+cedula.getText().trim()+"'");
             }
             if(!idPos.getText().trim().isEmpty()){
-                con.GUARDAR("UPDATE usuarios SET id_pos = '"+idPos.getText().trim()+"'" +
+                con.GUARDAR("UPDATE usuarios SET identificador_pos = '"+idPos.getText().trim()+"'" +
                         "WHERE cedula = '"+cedula.getText().trim()+"'");
             }
             if(!cedula.getText().trim().isEmpty()){

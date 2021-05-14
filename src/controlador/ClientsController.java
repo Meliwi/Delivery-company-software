@@ -26,6 +26,12 @@ public class ClientsController implements Initializable {
     @FXML
     private Label mensaje;
 
+    private static String cedulaCliente;
+
+    public static String getCedulaCliente() {
+        return cedulaCliente;
+    }
+
     public void ModulosBotonAction(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/vista/modules.fxml"));
         Stage modulesStage = ((Stage)(((Button)event.getSource()).getScene().getWindow()));//new Stage();
@@ -35,11 +41,12 @@ public class ClientsController implements Initializable {
     }
 
     public void siguienteButtonAction(ActionEvent event) {
+        cedulaCliente = cedula.getText().trim();
         Connect con  = new Connect();
         try{
             ResultSet resultado = con.CONSULTAR("SELECT * FROM cliente WHERE cedula = '"+cedula.getText().trim()+"';");
             if(resultado.next()){
-                Parent root = FXMLLoader.load(getClass().getResource("/vista/modules.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/vista/shipments.fxml"));
                 Stage modulesStage = ((Stage)(((Button)event.getSource()).getScene().getWindow()));
                 modulesStage.setTitle("Gestión de módulos");
                 modulesStage.setScene(new Scene(root, 900, 600));
