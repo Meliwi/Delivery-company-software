@@ -29,15 +29,16 @@ public class LoginController implements Initializable {
     @FXML
     private static String userRole;
 
+    @FXML
+    private static String userID;
+
 
     public static String getUserRole() {
         return userRole;
     }
-
-    public static void setUserRole(String userRole) {
-        LoginController.userRole = userRole;
+    public static String getUserID() {
+        return userID;
     }
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
@@ -53,6 +54,7 @@ public class LoginController implements Initializable {
                     "AND contrasena = '"+contrasena.getText().trim()+"';");
             if(resultado.next()){
                 userRole = resultado.getString(4);
+                userID = resultado.getString(1);
                 Parent root = FXMLLoader.load(getClass().getResource("/vista/modules.fxml"));
                 Stage modulesStage = ((Stage)(((Button)event.getSource()).getScene().getWindow()));
                 modulesStage.setTitle("Gestión de módulos");
