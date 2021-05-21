@@ -35,75 +35,88 @@ public class ModulesController implements Initializable {
     }
     @FXML
     public void ContinuarControlBoton(ActionEvent event) throws IOException {
-
-        if(controlador.LoginController.getUserRole().equals("1")){
-            if(comboBox.getSelectionModel().getSelectedItem().equals("Sedes")){
-                Parent root = FXMLLoader.load(getClass().getResource("/vista/officesManagement.fxml"));
-                Stage officesStage = ((Stage)(((Button)event.getSource()).getScene().getWindow()));
-                officesStage.setTitle("Gestión de sedes");
-                officesStage.setScene(new Scene(root, 900, 600));
-                officesStage.show();
-            }
-            if(comboBox.getSelectionModel().getSelectedItem().equals("Usuarios")){
-                Parent root = FXMLLoader.load(getClass().getResource("/vista/users.fxml"));
-                Stage usersStage = ((Stage)(((Button)event.getSource()).getScene().getWindow()));
-                usersStage.setTitle("Gestión de usuarios");
-                usersStage.setScene(new Scene(root, 900, 600));
-                usersStage.show();
-            }
-            if(comboBox.getSelectionModel().getSelectedItem().equals("Reportes")){
-                mensaje.setText("Este módulo aún se encuentra en desarrollo");
-            }
-            else{
-                mensaje.setText("Acceso Denegado");
-            }
+        Object combo = comboBox.getSelectionModel().getSelectedItem();
+        if(combo == null){
+            mensaje.setText("Seleccione un módulo.");
+            return; 
         }
-        if(controlador.LoginController.getUserRole().equals("2")){
-            if(comboBox.getSelectionModel().getSelectedItem().equals("POS")){
-                Parent root = FXMLLoader.load(getClass().getResource("/vista/clients.fxml"));
-                Stage clientsStage = ((Stage)(((Button)event.getSource()).getScene().getWindow()));
-                clientsStage.setTitle("Gestión de clientes");
-                clientsStage.setScene(new Scene(root, 900, 600));
-                clientsStage.show();
-            }
-            else{
-                mensaje.setText("Acceso Denegado");
-            }
-        }
-        if(controlador.LoginController.getUserRole().equals("3")){
-            if(comboBox.getSelectionModel().getSelectedItem().equals("Sedes")){
-                Parent root = FXMLLoader.load(getClass().getResource("/vista/officesManagement.fxml"));
-                Stage officesStage = ((Stage)(((Button)event.getSource()).getScene().getWindow()));
-                officesStage.setTitle("Gestión de sedes");
-                officesStage.setScene(new Scene(root, 900, 600));
-                officesStage.show();
-            }
-            if(comboBox.getSelectionModel().getSelectedItem().equals("Usuarios")){
-                Parent root = FXMLLoader.load(getClass().getResource("/vista/users.fxml"));
-                Stage usersStage = ((Stage)(((Button)event.getSource()).getScene().getWindow()));
-                usersStage.setTitle("Gestión de usuarios");
-                usersStage.setScene(new Scene(root, 900, 600));
-                usersStage.show();
-            }
-            else{
-                mensaje.setText("Acceso Denegado");
-            }
-        }
-        if(controlador.LoginController.getUserRole().equals("4")){
-            if(comboBox.getSelectionModel().getSelectedItem().equals("POS")){
-                mensaje.setText("Este módulo aún se encuentra en desarrollo");
-            }
-            else{
-                mensaje.setText("Acceso Denegado");
-            }
-        }
-        if(controlador.LoginController.getUserRole().equals("5")){
-            if(comboBox.getSelectionModel().getSelectedItem().equals("Nomina")){
-                mensaje.setText("Este módulo aún se encuentra en desarrollo");
-            }
-            else{
-                mensaje.setText("Acceso Denegado");
-            }
+        Parent root;
+        switch (LoginController.getUserRole()) {
+            case "1": //Gerente
+                switch (combo.toString()) {
+                    case "Sedes" -> {
+                        root = FXMLLoader.load(getClass().getResource("/vista/officesManagement.fxml"));
+                        Stage officesStage = ((Stage) (((Button) event.getSource()).getScene().getWindow()));
+                        officesStage.setTitle("Gestión de sedes");
+                        officesStage.setScene(new Scene(root, 900, 600));
+                        officesStage.show();
+                        return;
+                    }
+                    case "Usuarios" -> {
+                        root = FXMLLoader.load(getClass().getResource("/vista/users.fxml"));
+                        Stage usersStage = ((Stage) (((Button) event.getSource()).getScene().getWindow()));
+                        usersStage.setTitle("Gestión de usuarios");
+                        usersStage.setScene(new Scene(root, 900, 600));
+                        usersStage.show();
+                        return;
+                    }
+                    case "Reportes" -> {
+                        mensaje.setText("Este módulo aún se encuentra en desarrollo");
+                        return;
+                    }
+                    default -> {
+                        mensaje.setText("Acceso Denegado");
+                        return;
+                    }
+                }
+            case "2": //Auxiliar de operaciones
+                switch (combo.toString()){
+                    case "POS":
+                        root = FXMLLoader.load(getClass().getResource("/vista/officesManagement.fxml"));
+                        Stage officesStage = ((Stage) (((Button) event.getSource()).getScene().getWindow()));
+                        officesStage.setTitle("Gestión de sedes");
+                        officesStage.setScene(new Scene(root, 900, 600));
+                        officesStage.show();
+                        return;
+                    default:
+                        mensaje.setText("Acceso Denegado");
+                        return;
+                }
+            case "3": //Secretaria
+                switch (combo.toString()){
+                    case "Usuarios":
+                        root = FXMLLoader.load(getClass().getResource("/vista/users.fxml"));
+                        Stage usersStage = ((Stage) (((Button) event.getSource()).getScene().getWindow()));
+                        usersStage.setTitle("Gestión de usuarios");
+                        usersStage.setScene(new Scene(root, 900, 600));
+                        usersStage.show();
+                        return;
+                    default:
+                        mensaje.setText("Acceso Denegado");
+                        return;
+                }
+            case "4": //Operador de oficina
+                switch (combo.toString()){
+                    case "POS":
+                        root = FXMLLoader.load(getClass().getResource("/vista/officesManagement.fxml"));
+                        Stage officesStage = ((Stage) (((Button) event.getSource()).getScene().getWindow()));
+                        officesStage.setTitle("Gestión de sedes");
+                        officesStage.setScene(new Scene(root, 900, 600));
+                        officesStage.show();
+                        return;
+                    default:
+                        mensaje.setText("Acceso Denegado");
+                        break;
+                }
+            case "5": //Contador
+                switch (combo.toString()){
+                    case "Nomina":
+                        mensaje.setText("Este módulo aún se encuentra en desarrollo");
+                        return;
+                    default:
+                        mensaje.setText("Acceso Denegado");
+                        return;
+                }
         }
     }
 
