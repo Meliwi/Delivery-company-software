@@ -25,6 +25,9 @@ public class ShipmentsController {
     public TextField cantidad;
 
     @FXML
+    public TextField pesoPaquete;
+
+    @FXML
     public TextField seguro;
 
     @FXML
@@ -42,14 +45,84 @@ public class ShipmentsController {
     @FXML
     public ToggleGroup metodosPago;
 
+    @FXML
+    public ComboBox distancias;
+
+    private String paquetes[][] = new String[10][5];
+
+    private int auxPaquetes = 0;
+
     public void registrarButtonAction(ActionEvent actionEvent) {
+        Object seleccionDistancia = distancias.getSelectionModel().getSelectedItem();
+        if(direccionEnvio.getText().trim().isEmpty() && valor.getText().trim().isEmpty()
+                && seguro.getText().trim().isEmpty() && pesoPaquete.getText().trim().isEmpty()){
+            mensaje.setText("Campos incompletos");
+        }
+        else{
+            paquetes[auxPaquetes][0]= direccionEnvio.getText().trim();
+            paquetes[auxPaquetes][1]= valor.getText().trim();
+            paquetes[auxPaquetes][2]= "0";
+            if(!seguro.getText().trim().isEmpty()){
+                paquetes[auxPaquetes][2]= seguro.getText().trim();
+            }
+
+            paquetes[auxPaquetes][3]= pesoPaquete.getText().trim();
+            paquetes[auxPaquetes][4]= seleccionDistancia.toString();
+            auxPaquetes++;
+
+        }
+
+    }
+
+    private float calcularImpuesto(){
+        float impuestoTotal = 0;
+        for(int i=0; i<auxPaquetes; i++){
+            String distancia = paquetes[i][4];
+            double peso = parseInt(paquetes[i][3]);
+            double multDistancia = 1;
+            double categoriaPeso = 0;
+            switch (distancia) {
+                case "departamento" -> {
+                    multDistancia = 1.3;
+                }
+                case "interdepartamental" -> {
+                    multDistancia = 2;
+                }
+            }
+            if(peso<=5){
+                categoriaPeso = 2000;
+            }
+            else if(peso<=10){
+                categoriaPeso = 4000;
+            }
+            else if(peso<=15){
+                categoriaPeso = 6000;
+            }
+            else if(peso<=20){
+                categoriaPeso = 8000;
+            }
+            else{
+                categoriaPeso = 10000;
+            }
+            impuestoTotal += categoriaPeso*multDistancia;
+        }
+        return impuestoTotal;
+    }
+
+    private float calcularPrecio(){
+        return 0;
+    }
+
+
+    public void pagarButtonAction(ActionEvent actionEvent) {
+
         String envio = direccionEnvio.getText().trim();
         int precio = parseInt(valor.getText().trim());
-        int numCantidad = parseInt(cantidad.getText().trim());
         int poliza = 0;
         if(!seguro.getText().trim().isEmpty()){
             poliza = parseInt(seguro.getText().trim());
         }
+        int numPaquetes = auxPaquetes;
         String id_pos = "";
         String ciudad_pos = "";
         String cedulaCliente = controlador.ClientsController.getCedulaCliente();
@@ -59,17 +132,18 @@ public class ShipmentsController {
         int numeroGuiaEnvio = 0;
         String metodoPagoSeleccionado = "";
 
+
         Connect con  = new Connect();
 
         try {
-            ResultSet resultadoFactura = con.CONSULTAR("INSERT INTO factura (direccion_de_envio, fecha, valor, cantidad_paquetes)"+
-                    "VALUES ('"+envio+"',NOW(),'"+precio+"','"+numCantidad+"') RETURNING numero");
+            ResultSet resultadoFactura = con.CONSULTAR("INSERT INTO factura ( fecha, valor, cantidad_paquetes, impuesto)"+
+                    "VALUES (NOW(),'"+precio+"','" + numPaquetes +"',"+ 19 +") RETURNING numero");
 
             if (resultadoFactura.next()) {
-                    numeroFactura = parseInt(resultadoFactura.getString(1));
-                }
+                numeroFactura = parseInt(resultadoFactura.getString(1));
+            }
             else {
-                    mensaje.setText("No se ha podido registrar el envio");
+                mensaje.setText("No se ha podido registrar el envio");
             }
         }
         catch (SQLException throwables) {
@@ -87,8 +161,8 @@ public class ShipmentsController {
         }
 
         try {
-            ResultSet resultadoPago = con.CONSULTAR("INSERT INTO pago (num_factura, id_metodo_pago, impuesto, seguro)"+
-                    "VALUES ('"+numeroFactura+"','"+metodoPagoSeleccionado+"','"+19+"','"+ poliza+"') RETURNING numero");
+            ResultSet resultadoPago = con.CONSULTAR("INSERT INTO pago (num_factura, id_metodo_pago)"+
+                    "VALUES ('"+numeroFactura+"','"+metodoPagoSeleccionado+"') RETURNING numero");
 
             if (resultadoPago.next()) {
                 numeroPago = parseInt(resultadoPago.getString(1));
@@ -116,8 +190,8 @@ public class ShipmentsController {
         }
 
         try {
-            ResultSet resultadoEnvio = con.CONSULTAR("INSERT INTO envio (id_estado_envio, locaLizacion)"+
-                    "VALUES ('1','"+ciudad_pos+"') RETURNING num_guia");
+            ResultSet resultadoEnvio = con.CONSULTAR("INSERT INTO envio (id_estado_envio, locaLizacion, direccion_envio, seguro)"+
+                    "VALUES ('1','"+ciudad_pos+"','"+envio+"','"+poliza+"') RETURNING num_guia");
 
             if (resultadoEnvio.next()) {
                 numeroGuiaEnvio = parseInt(resultadoEnvio.getString(1));
@@ -144,9 +218,5 @@ public class ShipmentsController {
         else {
             mensaje.setText("No se ha podido registrar el envio");
         }
-
-
     }
-
-
 }
