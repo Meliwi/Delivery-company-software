@@ -1,28 +1,46 @@
 package controlador;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import modelo.Connect;
+import modelo.Users;
 
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static java.lang.Integer.parseInt;
 
 public class ShipmentsController {
-    @FXML
-    public TextField direccionEnvio;
-    @FXML
-    public TextField valor;
 
     @FXML
-    public TextField cantidad;
+    private TableView<String> tableShipments;
+    @FXML
+    private TableColumn<String,String> dirColumn;
+    @FXML
+    private TableColumn<String,String> pesoColumn;
+    @FXML
+    private TableColumn<String,String> distanColumn;
+    @FXML
+    private TableColumn<String,String> valorColumn;
+    @FXML
+    private TableColumn<String,String> seguroColumn;
+
+    @FXML
+    private ObservableList<String> listShipments;
+
+    @FXML
+    public TextField direccionEnvio;
 
     @FXML
     public TextField pesoPaquete;
@@ -48,39 +66,52 @@ public class ShipmentsController {
     @FXML
     public ComboBox distancias;
 
-    private String paquetes[][] = new String[10][5];
+    private String paquetes[][] = new String[10][4];
 
     private int auxPaquetes = 0;
 
     public void registrarButtonAction(ActionEvent actionEvent) {
         Object seleccionDistancia = distancias.getSelectionModel().getSelectedItem();
-        if(direccionEnvio.getText().trim().isEmpty() && valor.getText().trim().isEmpty()
+        if(direccionEnvio.getText().trim().isEmpty()
                 && seguro.getText().trim().isEmpty() && pesoPaquete.getText().trim().isEmpty()){
             mensaje.setText("Campos incompletos");
         }
         else{
             paquetes[auxPaquetes][0]= direccionEnvio.getText().trim();
-            paquetes[auxPaquetes][1]= valor.getText().trim();
-            paquetes[auxPaquetes][2]= "0";
+            paquetes[auxPaquetes][1]= "0";
             if(!seguro.getText().trim().isEmpty()){
-                paquetes[auxPaquetes][2]= seguro.getText().trim();
+                paquetes[auxPaquetes][1]= seguro.getText().trim();
             }
 
-            paquetes[auxPaquetes][3]= pesoPaquete.getText().trim();
-            paquetes[auxPaquetes][4]= seleccionDistancia.toString();
+            paquetes[auxPaquetes][2]= pesoPaquete.getText().trim();
+            paquetes[auxPaquetes][3]= seleccionDistancia.toString();
             auxPaquetes++;
 
         }
 
+        pesoColumn.setCellValueFactory(new PropertyValueFactory<String,String>("Peso"));
+        distanColumn.setCellValueFactory(new PropertyValueFactory<String,String>("Distancia"));
+        valorColumn.setCellValueFactory(new PropertyValueFactory<String,String>("Valor"));
+        seguroColumn.setCellValueFactory(new PropertyValueFactory<String,String>("Seguro"));
+
+        //Se hace el llamado a la función
+        listShipments = fillTableShipments();
+        //Se agregan los datos de observableList a la tabla
+        tableShipments.setItems(listShipments);
+
     }
 
-    private float calcularImpuesto(){
-        float impuestoTotal = 0;
+    private double calcularImpuesto(){
+        double impuestoTotal = 0;
+        String distancia;
+        double peso;
+        double multDistancia;
+        double categoriaPeso;
         for(int i=0; i<auxPaquetes; i++){
-            String distancia = paquetes[i][4];
-            double peso = parseInt(paquetes[i][3]);
-            double multDistancia = 1;
-            double categoriaPeso = 0;
+            distancia = paquetes[i][3];
+            peso = parseInt(paquetes[i][2]);
+            multDistancia = 1;
+            categoriaPeso = 0;
             switch (distancia) {
                 case "departamento" -> {
                     multDistancia = 1.3;
@@ -109,27 +140,28 @@ public class ShipmentsController {
         return impuestoTotal;
     }
 
-    private float calcularPrecio(){
-        return 0;
+    private double calcularPrecio( double impuesto) {
+        int seguro = 0;
+        for (int i = 0; i < auxPaquetes; i++) {
+            seguro += parseInt(paquetes[i][1]);
+        }
+        return impuesto+seguro;
     }
 
 
     public void pagarButtonAction(ActionEvent actionEvent) {
 
-        String envio = direccionEnvio.getText().trim();
-        int precio = parseInt(valor.getText().trim());
-        int poliza = 0;
-        if(!seguro.getText().trim().isEmpty()){
-            poliza = parseInt(seguro.getText().trim());
-        }
-        int numPaquetes = auxPaquetes;
+
+        double impuesto = calcularImpuesto();
+        double precio = calcularPrecio(impuesto);
+
         String id_pos = "";
         String ciudad_pos = "";
         String cedulaCliente = controlador.ClientsController.getCedulaCliente();
         String cedulaUsuario = controlador.LoginController.getUserID();
         int numeroFactura = 0;
         int numeroPago = 0;
-        int numeroGuiaEnvio = 0;
+        int numeroGuiaEnvio[] = new int[auxPaquetes];
         String metodoPagoSeleccionado = "";
 
 
@@ -137,7 +169,7 @@ public class ShipmentsController {
 
         try {
             ResultSet resultadoFactura = con.CONSULTAR("INSERT INTO factura ( fecha, valor, cantidad_paquetes, impuesto)"+
-                    "VALUES (NOW(),'"+precio+"','" + numPaquetes +"',"+ 19 +") RETURNING numero");
+                    "VALUES (NOW(),'"+precio+"','" + auxPaquetes +"',"+ impuesto +") RETURNING numero");
 
             if (resultadoFactura.next()) {
                 numeroFactura = parseInt(resultadoFactura.getString(1));
@@ -189,34 +221,46 @@ public class ShipmentsController {
             throwables.printStackTrace();
         }
 
-        try {
-            ResultSet resultadoEnvio = con.CONSULTAR("INSERT INTO envio (id_estado_envio, locaLizacion, direccion_envio, seguro)"+
-                    "VALUES ('1','"+ciudad_pos+"','"+envio+"','"+poliza+"') RETURNING num_guia");
+        for (int i = 0; i < auxPaquetes; i++) {
+            try {
+                ResultSet resultadoEnvio = con.CONSULTAR("INSERT INTO envio (id_estado_envio, locaLizacion, direccion_envio, seguro)"+
+                        "VALUES ('1','"+ciudad_pos+"','"+ paquetes[i][0] +"','"+paquetes[i][1]+"') RETURNING num_guia");
 
-            if (resultadoEnvio.next()) {
-                numeroGuiaEnvio = parseInt(resultadoEnvio.getString(1));
+                if (resultadoEnvio.next()) {
+                    numeroGuiaEnvio[i] = parseInt(resultadoEnvio.getString(1));
+                }
+                else {
+                    mensaje.setText("No se ha podido registrar el envio");
+                }
+            }
+            catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+
+            System.out.println(cedulaCliente);
+            String resultadoGestionEnvios = "INSERT INTO gestion_envios (num_pago, id_envio, cedula_cliente, id_pos)"+
+                    "VALUES ('"+numeroPago+"','"+numeroGuiaEnvio[i]+"','"+cedulaCliente+"','"+id_pos+"')";
+
+            if (con.GUARDAR(resultadoGestionEnvios)) {
+                mensaje.setText("El envio se registró con exito");
             }
             else {
                 mensaje.setText("No se ha podido registrar el envio");
             }
         }
-        catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        auxPaquetes = 0;
+    }
 
+    private ObservableList<String> fillTableShipments() {
 
-        String resultadoGestionEnvios = "INSERT INTO gestion_envios (num_pago, id_envio, cedula_cliente, id_pos)"+
-                "VALUES ('"+numeroPago+"','"+numeroGuiaEnvio+"','"+cedulaCliente+"','"+id_pos+"')";
-
-        if (con.GUARDAR(resultadoGestionEnvios)) {
-            mensaje.setText("El envio se registró con exito");
-            direccionEnvio.setText("");
-            valor.setText("");
-            cantidad.setText("");
-            seguro.setText("");
+        ObservableList<String> listaEnvios = FXCollections.observableArrayList();
+        for (int i = 0; i < auxPaquetes; i++) {
+            listaEnvios.add(paquetes[i][0]);
+            listaEnvios.add(paquetes[i][1]);
+            listaEnvios.add(paquetes[i][2]);
+            listaEnvios.add(paquetes[i][3]);
+            listaEnvios.add(paquetes[i][3]);
         }
-        else {
-            mensaje.setText("No se ha podido registrar el envio");
-        }
+        return listaEnvios;
     }
 }

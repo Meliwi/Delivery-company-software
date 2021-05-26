@@ -72,7 +72,7 @@ public class ModulesController implements Initializable {
             case "2": //Auxiliar de operaciones
                 switch (combo.toString()){
                     case "POS":
-                        root = FXMLLoader.load(getClass().getResource("/vista/shipments.fxml"));
+                        root = FXMLLoader.load(getClass().getResource("/vista/clients.fxml"));
                         Stage officesStage = ((Stage) (((Button) event.getSource()).getScene().getWindow()));
                         officesStage.setTitle("Gestión de sedes");
                         officesStage.setScene(new Scene(root, 900, 600));
@@ -98,7 +98,7 @@ public class ModulesController implements Initializable {
             case "4": //Operador de oficina
                 switch (combo.toString()){
                     case "POS":
-                        root = FXMLLoader.load(getClass().getResource("/vista/shipments.fxml"));
+                        root = FXMLLoader.load(getClass().getResource("/vista/clients.fxml"));
                         Stage officesStage = ((Stage) (((Button) event.getSource()).getScene().getWindow()));
                         officesStage.setTitle("Gestión de sedes");
                         officesStage.setScene(new Scene(root, 900, 600));
