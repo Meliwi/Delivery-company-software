@@ -9,101 +9,99 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.control.ToggleGroup?>
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="/vista/styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.ShipmentsController">
     <children>
         <Pane prefHeight="600.0" prefWidth="458.0">
             <children>
                 <ImageView fx:id="panelFondo" fitHeight="600.0" fitWidth="458.0" pickOnBounds="true" preserveRatio="true">
                 </ImageView>
-                <Pane fx:id="panelForm" layoutX="51.0" layoutY="69.0" minWidth="300.0" prefHeight="484.0" prefWidth="370.0" style="-fx-background-color: white;">
+                <Pane fx:id="panelForm" layoutX="51.0" layoutY="60.0" minWidth="300.0" prefHeight="500.0" prefWidth="370.0" style="-fx-background-color: white;">
                     <children>
-                        <Label layoutX="27.0" layoutY="49.0" prefHeight="41.0" prefWidth="316.0" text="REGISTRO DE ENVÍO" textAlignment="CENTER" textFill="#006ee1">
+                        <Label layoutX="33.0" layoutY="43.0" prefHeight="41.0" prefWidth="305.0" text="REGISTRO DE ENVÍO" textAlignment="CENTER" textFill="#006ee1">
                             <font>
                                 <Font name="Franklin Gothic Heavy" size="32.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="direccionEnvio" layoutX="45.0" layoutY="110.0" prefHeight="26.0" prefWidth="268.0" promptText=" Dirección de envio">
+                        <TextField fx:id="direccionEnvio" layoutX="53.0" layoutY="112.0" prefHeight="26.0" prefWidth="268.0" promptText=" Dirección de envio">
                             <font>
                                 <Font name="Arial" size="14.0" />
                             </font>
                         </TextField>
-                        <TextField fx:id="valor" layoutX="45.0" layoutY="152.0" prefHeight="26.0" prefWidth="268.0" promptText="Valor">
+                        <TextField fx:id="seguro" layoutX="53.0" layoutY="150.0" prefHeight="26.0" prefWidth="268.0" promptText="Seguro">
                             <font>
                                 <Font name="Arial" size="14.0" />
                             </font>
                         </TextField>
-                        <TextField fx:id="cantidad" layoutX="45.0" layoutY="193.0" prefHeight="26.0" prefWidth="268.0" promptText="Cantidad">
+                        <TextField fx:id="pesoPaquete" layoutX="53.0" layoutY="190.0" prefHeight="26.0" prefWidth="268.0" promptText="Peso del paquete">
                             <font>
                                 <Font name="Arial" size="14.0" />
                             </font>
                         </TextField>
-                        <TextField fx:id="seguro" layoutX="45.0" layoutY="232.0" prefHeight="26.0" prefWidth="268.0" promptText="Seguro">
-                            <font>
-                                <Font name="Arial" size="14.0" />
-                            </font>
-                        </TextField>
-                        <Button layoutX="131.0" layoutY="437.0" mnemonicParsing="false" onAction="#registrarButtonAction" prefHeight="23.0" prefWidth="96.0" style="-fx-background-color: #006ee1;" text="REGISTRAR" textAlignment="CENTER" textFill="WHITE">
+
+                        <Button layoutX="130.0" layoutY="314.0" mnemonicParsing="false" onAction="#registrarButtonAction" prefHeight="23.0" prefWidth="96.0" style="-fx-background-color: #006ee1;" text="REGISTRAR" textAlignment="CENTER" textFill="WHITE">
                             <font>
                                 <Font name="Arial" size="12.0" />
                             </font>
                         </Button>
-                        <Label fx:id="mensaje" alignment="CENTER" layoutX="55.0" layoutY="403.0" prefHeight="17.0" prefWidth="249.0" textFill="#ff2f2f">
+                        <Label fx:id="mensaje" alignment="CENTER" layoutX="61.0" layoutY="287.0" prefHeight="17.0" prefWidth="249.0" textFill="#ff2f2f">
                             <font>
                                 <Font name="Arial" size="14.0" />
                             </font>
                         </Label>
-                        <fx:define>
-                            <ToggleGroup fx:id="metodosPago" />
-                        </fx:define>
-                  <RadioButton fx:id="efectivo" toggleGroup="$metodosPago" layoutX="45.0" layoutY="365.0" mnemonicParsing="false" text="Efectivo">
+                  <RadioButton fx:id="efectivo" layoutX="55.0" layoutY="375.0" mnemonicParsing="false" text="Efectivo">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="metodosPago" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="debito" layoutX="152.0" layoutY="375.0" mnemonicParsing="false" text="Debito" toggleGroup="$metodosPago">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton fx:id="debito" layoutX="146.0" toggleGroup="$metodosPago" layoutY="365.0" mnemonicParsing="false" text="Debito">
+                  <RadioButton fx:id="credito" layoutX="239.0" layoutY="375.0" mnemonicParsing="false" text="Credito" toggleGroup="$metodosPago">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton fx:id="credito" layoutX="242.0" toggleGroup="$metodosPago" layoutY="365.0" mnemonicParsing="false" text="Credito">
-                     <font>
-                        <Font name="Arial" size="14.0" />
-                     </font>
-                  </RadioButton>
-                  <TextField fx:id="pesoPaquete" layoutX="45.0" layoutY="277.0" prefHeight="26.0" prefWidth="268.0" promptText="Peso del paquete">
-                     <font>
-                        <Font name="Arial" size="14.0" />
-                     </font>
-                  </TextField>
-                        <ComboBox fx:id="comboBox" layoutX="72.0" layoutY="322.0" opacity="0.58" prefHeight="26.0" prefWidth="213.0" promptText="Seleccione una opcion">
+
+                        <ComboBox fx:id="distancias" layoutX="81.0" layoutY="237.0" opacity="0.58" prefHeight="26.0" prefWidth="213.0" promptText="Seleccione la distancia">
                             <items>
-                                <FXCollections fx:id="modulosListado" fx:factory="observableArrayList">
-                                    <String fx:id="sedes" fx:value="Misma ciudad" />
-                                    <String fx:id="usuarios" fx:value="Mismo departamento" />
-                                    <String fx:id="pos" fx:value="Interdepartamental" />
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:id="ciudad" fx:value="Misma ciudad" />
+                                    <String fx:id="departamento" fx:value="Mismo departamento" />
+                                    <String fx:id="interdepartamental" fx:value="Interdepartamental" />
                                 </FXCollections>
                             </items>
                         </ComboBox>
+                  <Line endX="131.0" fill="#aba6a6" layoutX="187.0" layoutY="360.0" opacity="0.73" startX="-132.0" stroke="#aba5a5" strokeWidth="0.7" style="-fx-stroke-dash-array: 5;" />
+                  <Button layoutX="130.0" layoutY="418.0" mnemonicParsing="false" onAction="#pagarButtonAction" prefHeight="23.0" prefWidth="96.0" style="-fx-background-color: #006ee1;" text="PAGAR" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                  </Button>
                     </children>
                 </Pane>
             </children>
         </Pane>
           <Pane prefHeight="600.0" prefWidth="446.0">
               <children>
-            <TableView layoutY="200.0" prefHeight="200.0" prefWidth="444.0">
+            <TableView fx:id="tableShipments" layoutX="-14.0" layoutY="200.0" prefHeight="200.0" prefWidth="444.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="ID envio" />
-                <TableColumn prefWidth="75.0" text="Dirección" />
-                  <TableColumn prefWidth="75.0" text="Valor" />
-                  <TableColumn prefWidth="61.0" text="Cantidad" />
-                  <TableColumn prefWidth="89.0" text="Metodo" />
-                  <TableColumn prefWidth="75.0" text="Seguro" />
+                <TableColumn fx:id="dirColumn" prefWidth="163.0" text="Dirección" />
+                  <TableColumn fx:id="pesoColumn" prefWidth="42.0" text="Peso" />
+                  <TableColumn fx:id="distanColumn" prefWidth="74.0" text="Distancia" />
+                  <TableColumn fx:id="valorColumn" prefWidth="95.0" text="Valor" />
+                  <TableColumn fx:id="seguroColumn" prefWidth="71.0" text="Seguro" />
               </columns>
             </TableView>
                   <Button fx:id="ModulosBoton" layoutX="233.0" layoutY="14.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="77.0" style="-fx-background-color: #006ee1;" text="MÓDULOS" textAlignment="CENTER" textFill="WHITE">
