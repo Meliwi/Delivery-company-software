@@ -1,44 +1,37 @@
 package controlador;
 
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 import modelo.Connect;
-import modelo.Shipment;
-import modelo.Users;
-
-import java.io.IOException;
+import modelo.Paquete;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import static java.lang.Integer.parseInt;
+
 
 public class ShipmentsController implements Initializable {
 
     @FXML
-    private TableView<Shipment> tableShipments;
+    private TableView<Paquete> tableShipments;
     @FXML
-    private TableColumn<Shipment,String> dirColumn;
+    private TableColumn<Paquete,String> dirColumn;
     @FXML
-    private TableColumn<Shipment,String> pesoColumn;
+    private TableColumn<Paquete,String> pesoColumn;
     @FXML
-    private TableColumn<Shipment,String> distanColumn;
+    private TableColumn<Paquete,String> distanColumn;
     @FXML
-    private TableColumn<String,String> valorColumn;
+    private TableColumn<Paquete,String> impuestoColumn;
     @FXML
-    private TableColumn<String,String> seguroColumn;
+    private TableColumn<Paquete,String> seguroColumn;
 
 
     @FXML
@@ -72,31 +65,34 @@ public class ShipmentsController implements Initializable {
 
     private int auxPaquetes = 0;
 
+    private double impuestoPaquete[] = new double[10];
 
     public void registrarButtonAction(ActionEvent actionEvent) {
 
         Object seleccionDistancia = distancias.getSelectionModel().getSelectedItem();
-        if(direccionEnvio.getText().trim().isEmpty()
-                && seguro.getText().trim().isEmpty() && pesoPaquete.getText().trim().isEmpty()){
+
+        if (direccionEnvio.getText().trim().isEmpty()
+                && seguro.getText().trim().isEmpty() && pesoPaquete.getText().trim().isEmpty()) {
             mensaje.setText("Campos incompletos");
-        }
-        else{
-            paquetes[auxPaquetes][0]= direccionEnvio.getText().trim();
-            paquetes[auxPaquetes][1]= "0";
-            if(!seguro.getText().trim().isEmpty()){
-                paquetes[auxPaquetes][1]= seguro.getText().trim();
+        } else {
+            paquetes[auxPaquetes][0] = direccionEnvio.getText().trim();
+            paquetes[auxPaquetes][1] = "0";
+            if (!seguro.getText().trim().isEmpty()) {
+                paquetes[auxPaquetes][1] = seguro.getText().trim();
             }
 
-            paquetes[auxPaquetes][2]= pesoPaquete.getText().trim();
-            paquetes[auxPaquetes][3]= seleccionDistancia.toString();
+            paquetes[auxPaquetes][2] = pesoPaquete.getText().trim();
+            paquetes[auxPaquetes][3] = seleccionDistancia.toString();
             auxPaquetes++;
-
         }
         fillTableShipments();
-
     }
 
+
+    /*Función encargada de calcular el impuesto del paquete, teniendo en cuenta el peso
+    y la distancia a donde se quiera enviar */
     private double calcularImpuesto(){
+
         double impuestoTotal = 0;
         String distancia;
         double peso;
@@ -108,10 +104,10 @@ public class ShipmentsController implements Initializable {
             multDistancia = 1;
             categoriaPeso = 0;
             switch (distancia) {
-                case "departamento" -> {
+                case "Mismo departamento" -> {
                     multDistancia = 1.3;
                 }
-                case "interdepartamental" -> {
+                case "Interdepartamental" -> {
                     multDistancia = 2;
                 }
             }
@@ -131,10 +127,12 @@ public class ShipmentsController implements Initializable {
                 categoriaPeso = 10000;
             }
             impuestoTotal += categoriaPeso*multDistancia;
+            impuestoPaquete[i] = categoriaPeso*multDistancia;
         }
         return impuestoTotal;
     }
 
+    //Funcion que calcula el precio total, teniendo en cuenta el impuesto calculado y el seguro
     private double calcularPrecio( double impuesto) {
         int seguro = 0;
         for (int i = 0; i < auxPaquetes; i++) {
@@ -146,10 +144,8 @@ public class ShipmentsController implements Initializable {
 
     public void pagarButtonAction(ActionEvent actionEvent) {
 
-
         double impuesto = calcularImpuesto();
         double precio = calcularPrecio(impuesto);
-
         String id_pos = "";
         String ciudad_pos = "";
         String cedulaCliente = controlador.ClientsController.getCedulaCliente();
@@ -158,7 +154,6 @@ public class ShipmentsController implements Initializable {
         int numeroPago = 0;
         int numeroGuiaEnvio[] = new int[auxPaquetes];
         String metodoPagoSeleccionado = "";
-
 
         Connect con  = new Connect();
 
@@ -245,10 +240,30 @@ public class ShipmentsController implements Initializable {
         }
         auxPaquetes = 0;
     }
+    private ObservableList<Paquete> fillTableShipments(){
+        ObservableList<Paquete> listaInfo = FXCollections.observableArrayList();
+        calcularImpuesto();
+        for (int i = 0; i<auxPaquetes;i++){
+            listaInfo.add(
+                    new Paquete(paquetes[i][0],
+                            paquetes[i][2],
+                            paquetes[i][3],
+                            impuestoPaquete[i],
+                            paquetes[i][1])
+            );
+        }
+        tableShipments.setItems(listaInfo);
+        return listaInfo;
+    }
 
-    private void fillTableShipments() {
 
-        tableShipments.getItems().add(new Shipment(paquetes[auxPaquetes-1][0], paquetes[auxPaquetes-1][2], paquetes[auxPaquetes-1][3] ));
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        dirColumn.setCellValueFactory(new PropertyValueFactory<Paquete, String>("direccion"));
+        pesoColumn.setCellValueFactory(new PropertyValueFactory<Paquete, String>("peso"));
+        distanColumn.setCellValueFactory(new PropertyValueFactory<Paquete, String>("distancia"));
+        impuestoColumn.setCellValueFactory(new PropertyValueFactory<Paquete,String>("impuesto"));
+        seguroColumn.setCellValueFactory(new PropertyValueFactory<Paquete,String>("seguro"));
 
     }
 

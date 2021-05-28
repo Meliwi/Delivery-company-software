@@ -73,7 +73,6 @@
                         <Font name="Arial" size="14.0" />
                      </font>
                   </RadioButton>
-
                         <ComboBox fx:id="distancias" layoutX="81.0" layoutY="237.0" opacity="0.58" prefHeight="26.0" prefWidth="213.0" promptText="Seleccione la distancia">
                             <items>
                                 <FXCollections fx:factory="observableArrayList">
@@ -95,13 +94,16 @@
         </Pane>
           <Pane prefHeight="600.0" prefWidth="446.0">
               <children>
-            <TableView fx:id="tableShipments" layoutX="-14.0" layoutY="200.0" prefHeight="200.0" prefWidth="444.0">
+            <TableView fx:id="tableShipments" layoutX="11.0" layoutY="200.0" prefHeight="200.0" prefWidth="423.0">
+              <placeholder>
+                  <Label text="" />
+              </placeholder>
               <columns>
-                <TableColumn fx:id="dirColumn" prefWidth="163.0" text="Dirección" />
-                  <TableColumn fx:id="pesoColumn" prefWidth="42.0" text="Peso" />
+                <TableColumn fx:id="dirColumn" prefWidth="119.0" text="Dirección" />
+                  <TableColumn fx:id="pesoColumn" prefWidth="86.0" text="Peso" />
                   <TableColumn fx:id="distanColumn" prefWidth="74.0" text="Distancia" />
-                  <TableColumn fx:id="valorColumn" prefWidth="95.0" text="Valor" />
-                  <TableColumn fx:id="seguroColumn" prefWidth="71.0" text="Seguro" />
+                  <TableColumn fx:id="impuestoColumn" prefWidth="86.0" text="Impuesto" />
+                  <TableColumn fx:id="seguroColumn" prefWidth="57.0" text="Seguro" />
               </columns>
             </TableView>
                   <Button fx:id="ModulosBoton" layoutX="233.0" layoutY="14.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="77.0" style="-fx-background-color: #006ee1;" text="MÓDULOS" textAlignment="CENTER" textFill="WHITE">
