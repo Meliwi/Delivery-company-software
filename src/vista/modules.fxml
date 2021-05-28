@@ -28,7 +28,6 @@
                         <Font name="Arial" size="14.0" />
                      </font>
                   </Label>
-
                   <ComboBox fx:id="comboBox" layoutX="99.0" layoutY="170.0" opacity="0.58" prefHeight="41.0" prefWidth="213.0" promptText="Seleccione una opcion">
                      <items>
                         <FXCollections fx:id="modulosListado" fx:factory="observableArrayList">
