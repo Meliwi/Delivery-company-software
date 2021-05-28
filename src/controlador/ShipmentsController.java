@@ -5,39 +5,41 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import modelo.Connect;
+import modelo.Shipment;
 import modelo.Users;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static java.lang.Integer.parseInt;
 
-public class ShipmentsController {
+public class ShipmentsController implements Initializable {
 
     @FXML
-    private TableView<String> tableShipments;
+    private TableView<Shipment> tableShipments;
     @FXML
-    private TableColumn<String,String> dirColumn;
+    private TableColumn<Shipment,String> dirColumn;
     @FXML
-    private TableColumn<String,String> pesoColumn;
+    private TableColumn<Shipment,String> pesoColumn;
     @FXML
-    private TableColumn<String,String> distanColumn;
+    private TableColumn<Shipment,String> distanColumn;
     @FXML
     private TableColumn<String,String> valorColumn;
     @FXML
     private TableColumn<String,String> seguroColumn;
 
-    @FXML
-    private ObservableList<String> listShipments;
 
     @FXML
     public TextField direccionEnvio;
@@ -70,7 +72,9 @@ public class ShipmentsController {
 
     private int auxPaquetes = 0;
 
+
     public void registrarButtonAction(ActionEvent actionEvent) {
+
         Object seleccionDistancia = distancias.getSelectionModel().getSelectedItem();
         if(direccionEnvio.getText().trim().isEmpty()
                 && seguro.getText().trim().isEmpty() && pesoPaquete.getText().trim().isEmpty()){
@@ -88,16 +92,7 @@ public class ShipmentsController {
             auxPaquetes++;
 
         }
-
-        pesoColumn.setCellValueFactory(new PropertyValueFactory<String,String>("Peso"));
-        distanColumn.setCellValueFactory(new PropertyValueFactory<String,String>("Distancia"));
-        valorColumn.setCellValueFactory(new PropertyValueFactory<String,String>("Valor"));
-        seguroColumn.setCellValueFactory(new PropertyValueFactory<String,String>("Seguro"));
-
-        //Se hace el llamado a la función
-        listShipments = fillTableShipments();
-        //Se agregan los datos de observableList a la tabla
-        tableShipments.setItems(listShipments);
+        fillTableShipments();
 
     }
 
@@ -251,16 +246,17 @@ public class ShipmentsController {
         auxPaquetes = 0;
     }
 
-    private ObservableList<String> fillTableShipments() {
+    private void fillTableShipments() {
 
-        ObservableList<String> listaEnvios = FXCollections.observableArrayList();
-        for (int i = 0; i < auxPaquetes; i++) {
-            listaEnvios.add(paquetes[i][0]);
-            listaEnvios.add(paquetes[i][1]);
-            listaEnvios.add(paquetes[i][2]);
-            listaEnvios.add(paquetes[i][3]);
-            listaEnvios.add(paquetes[i][3]);
-        }
-        return listaEnvios;
+        tableShipments.getItems().add(new Shipment(paquetes[auxPaquetes-1][0], paquetes[auxPaquetes-1][2], paquetes[auxPaquetes-1][3] ));
+
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        dirColumn.setCellValueFactory(new PropertyValueFactory<Shipment,String>("direccion"));
+        pesoColumn.setCellValueFactory(new PropertyValueFactory<Shipment,String>("peso"));
+        distanColumn.setCellValueFactory(new PropertyValueFactory<Shipment,String>("distancia"));
+
     }
 }
