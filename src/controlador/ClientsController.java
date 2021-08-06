@@ -32,6 +32,19 @@ public class ClientsController implements Initializable {
         return cedulaCliente;
     }
 
+    private static String nombreCliente;
+
+    public static String getNombreCliente() { return nombreCliente; }
+
+    private static String telefonoCliente;
+
+    public static String getTelefonoCliente() { return telefonoCliente; }
+
+    private static String direccionCliente;
+
+    public static String getDireccionCliente() { return direccionCliente; }
+
+
     public void ModulosBotonAction(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/vista/modules.fxml"));
         Stage modulesStage = ((Stage)(((Button)event.getSource()).getScene().getWindow()));//new Stage();
@@ -46,6 +59,9 @@ public class ClientsController implements Initializable {
         try{
             ResultSet resultado = con.CONSULTAR("SELECT * FROM cliente WHERE cedula = '"+cedula.getText().trim()+"';");
             if(resultado.next()){
+                nombreCliente = resultado.getString(3) + " " + resultado.getString(4);
+                telefonoCliente = resultado.getString(6);
+                direccionCliente = resultado.getString(7) + "," + resultado.getString(5);
                 Parent root = FXMLLoader.load(getClass().getResource("/vista/shipments.fxml"));
                 Stage modulesStage = ((Stage)(((Button)event.getSource()).getScene().getWindow()));
                 modulesStage.setTitle("Gestión de módulos");
