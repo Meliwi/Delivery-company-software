@@ -11,18 +11,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="377.0" prefWidth="393.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="377.0" prefWidth="393.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="controlador.cardPaymentController" >
    <children>
       <Pane prefHeight="128.0" prefWidth="526.0">
          <children>
             <ImageView fitHeight="83.0" fitWidth="393.0" opacity="0.6" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="/Images/background-payment.png" />
+                  <Image url="@../Images/background-payment.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="57.0" fitWidth="174.0" layoutX="120.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="/Images/logo.png" />
+                  <Image url="@../Images/logo.png" />
                </image>
             </ImageView>
          </children>
@@ -47,25 +47,20 @@
             <TextField fx:id="titular" layoutX="70.0" layoutY="106.0" prefHeight="25.0" prefWidth="254.0" promptText="Nombre del titular" />
             <TextField fx:id="numeroTarjeta" layoutX="71.0" layoutY="141.0" prefHeight="25.0" prefWidth="254.0" promptText="Número de la tarjeta" />
             <TextField fx:id="fecha" layoutX="100.0" layoutY="175.0" prefHeight="25.0" prefWidth="82.0" promptText="MM / AAAA" />
-            <TextField fx:id="cvc" layoutX="213.0" layoutY="175.0" prefHeight="25.0" prefWidth="82.0" promptText="CVC" />
+            <TextField fx:id="cvc" layoutX="215.0" layoutY="175.0" prefHeight="25.0" prefWidth="82.0" promptText="CVC" />
             <ImageView fitHeight="17.0" fitWidth="31.0" layoutX="51.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="/Images/creditCard.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="77.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="/Images/calendar.png" />
+                  <Image url="@../Images/creditCard.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="190.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="/Images/lock.png" />
+                  <Image url="@../Images/lock.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="23.0" fitWidth="17.0" layoutX="51.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="/Images/user.png" />
+                  <Image url="@../Images/user.png" />
                </image>
             </ImageView>
             <RadioButton fx:id="debito" layoutX="67.0" layoutY="69.0" mnemonicParsing="false" text="Débito" textFill="#797777">
@@ -81,11 +76,16 @@
                   <Font name="Arial" size="14.0" />
                </font>
             </RadioButton>
-            <Button fx:id="pagarBoton" layoutX="148.0" layoutY="258.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="97.0" style="-fx-background-color: #006ee1;" text="PAGAR" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="pagarBoton" onAction= "#pagarButtonAction" layoutX="148.0" layoutY="258.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="97.0" style="-fx-background-color: #006ee1;" text="PAGAR" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Arial" size="12.0" />
                </font>
             </Button>
+            <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="71.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/calendar.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
    </children>

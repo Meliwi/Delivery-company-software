@@ -87,11 +87,15 @@ public class ShipmentsController implements Initializable {
 
     private int copiaAuxPaquetes = 0;
 
-    private String precioEnvioTotal;
+    private static String precioEnvioTotal;
 
     private double impuestoPaquete[] = new double[10];
 
     private boolean pagoHecho = false;
+
+    public static String getPrecioEnvioTotal() {
+        return precioEnvioTotal;
+    }
 
     public void registrarButtonAction(ActionEvent actionEvent) {
 
