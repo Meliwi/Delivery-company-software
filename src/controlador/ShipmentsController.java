@@ -7,12 +7,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Stage;
 import modelo.Connect;
 import modelo.Paquete;
 import java.io.File;
@@ -60,10 +64,7 @@ public class ShipmentsController implements Initializable {
     public RadioButton efectivo;
 
     @FXML
-    public RadioButton debito;
-
-    @FXML
-    public RadioButton credito;
+    public RadioButton tarjeta;
 
     @FXML
     public Label mensaje;
@@ -168,7 +169,7 @@ public class ShipmentsController implements Initializable {
     }
 
 
-    public void pagarButtonAction(ActionEvent actionEvent) {
+    public void pagarButtonAction(ActionEvent actionEvent) throws IOException  {
 
         double impuesto = calcularImpuesto();
         double precio = calcularPrecio(impuesto);
@@ -201,11 +202,13 @@ public class ShipmentsController implements Initializable {
         if(efectivo.isSelected()){
             metodoPagoSeleccionado = "1";
         }
-        if(debito.isSelected()){
+        if(tarjeta.isSelected()){
             metodoPagoSeleccionado = "2";
-        }
-        if(credito.isSelected()){
-            metodoPagoSeleccionado = "3";
+            Parent root = FXMLLoader.load(getClass().getResource("/vista/cardPayment.fxml"));
+            Stage cardPayment = new Stage();
+            cardPayment .setTitle("Pago con tarjeta");
+            cardPayment.setScene(new Scene(root, 393, 377));
+            cardPayment.show();
         }
 
         try {

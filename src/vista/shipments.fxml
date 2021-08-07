@@ -10,13 +10,13 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.image.Image?>
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="/vista/styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.ShipmentsController">
     <children>
         <Pane prefHeight="600.0" prefWidth="458.0">
@@ -56,7 +56,7 @@
                                 <Font name="Arial" size="14.0" />
                             </font>
                         </Label>
-                  <RadioButton fx:id="efectivo" layoutX="55.0" layoutY="375.0" mnemonicParsing="false" text="Efectivo">
+                  <RadioButton fx:id="efectivo" layoutX="67.0" layoutY="375.0" mnemonicParsing="false" text="Efectivo">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
@@ -64,12 +64,7 @@
                         <ToggleGroup fx:id="metodosPago" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton fx:id="debito" layoutX="152.0" layoutY="375.0" mnemonicParsing="false" text="Debito" toggleGroup="$metodosPago">
-                     <font>
-                        <Font name="Arial" size="14.0" />
-                     </font>
-                  </RadioButton>
-                  <RadioButton fx:id="credito" layoutX="239.0" layoutY="375.0" mnemonicParsing="false" text="Credito" toggleGroup="$metodosPago">
+                  <RadioButton fx:id="tarjeta" layoutX="188.0" layoutY="375.0" mnemonicParsing="false" text="Debito/Crédito" toggleGroup="$metodosPago">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
@@ -122,10 +117,10 @@
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <ImageView onMousePressed="#generarFactura" fx:id="imagenFacture" fitHeight="26.0" fitWidth="27.0" layoutX="22.0" layoutY="418.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="/Images/Factura.png" />
-               </image>
+            <ImageView fx:id="imagenFacture" fitHeight="26.0" fitWidth="27.0" layoutX="22.0" layoutY="418.0" onMousePressed="#generarFactura" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="/Images/Factura.png"></Image>
+                </image>
             </ImageView>
               </children>
           </Pane>
