@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="377.0" prefWidth="393.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="controlador.cardPaymentController" >
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="405.0" prefWidth="393.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.cardPaymentController">
    <children>
       <Pane prefHeight="128.0" prefWidth="526.0">
          <children>
@@ -27,43 +27,43 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="panelForm" minWidth="174.0" prefHeight="340.0" prefWidth="393.0" style="-fx-background-color: #eaeaea;">
+      <Pane fx:id="panelForm" minWidth="174.0" prefHeight="369.0" prefWidth="393.0" style="-fx-background-color: #eaeaea;">
          <children>
-            <Label fx:id="mensaje" alignment="CENTER" layoutX="45.0" layoutY="234.0" prefHeight="17.0" prefWidth="307.0" textAlignment="CENTER" textFill="#ff2323">
+            <Label fx:id="mensaje" alignment="CENTER" layoutX="44.0" layoutY="212.0" maxWidth="307.0" prefHeight="51.0" prefWidth="307.0" textAlignment="CENTER" textFill="#ff2323">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="7.0" layoutY="31.0" prefHeight="17.0" prefWidth="307.0" text="Seleccione el método de pago" textAlignment="CENTER" textFill="#797777">
+            <Label alignment="CENTER" layoutX="2.0" layoutY="21.0" prefHeight="17.0" prefWidth="307.0" text="Seleccione el método de pago" textAlignment="CENTER" textFill="#797777">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="totalPagar" alignment="CENTER" layoutX="51.0" layoutY="209.0" prefHeight="17.0" prefWidth="139.0" text="Total a pagar: " textAlignment="CENTER" textFill="#797777">
+            <Label fx:id="totalPagar" alignment="CENTER" layoutX="56.0" layoutY="188.0" prefHeight="17.0" prefWidth="139.0" text="Total a pagar: " textAlignment="CENTER" textFill="#797777">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="titular" layoutX="70.0" layoutY="106.0" prefHeight="25.0" prefWidth="254.0" promptText="Nombre del titular" />
-            <TextField fx:id="numeroTarjeta" layoutX="71.0" layoutY="141.0" prefHeight="25.0" prefWidth="254.0" promptText="Número de la tarjeta" />
-            <TextField fx:id="fecha" layoutX="100.0" layoutY="175.0" prefHeight="25.0" prefWidth="82.0" promptText="MM / AAAA" />
-            <TextField fx:id="cvc" layoutX="215.0" layoutY="175.0" prefHeight="25.0" prefWidth="82.0" promptText="CVC" />
-            <ImageView fitHeight="17.0" fitWidth="31.0" layoutX="51.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
+            <TextField fx:id="titular" layoutX="70.0" layoutY="79.0" prefHeight="25.0" prefWidth="254.0" promptText="Nombre del titular" />
+            <TextField fx:id="numeroTarjeta" layoutX="70.0" layoutY="120.0" prefHeight="25.0" prefWidth="254.0" promptText="Número de la tarjeta" />
+            <TextField fx:id="fecha" layoutX="99.0" layoutY="154.0" prefHeight="25.0" prefWidth="82.0" promptText="MM / AAAA" />
+            <TextField fx:id="cvc" layoutX="212.0" layoutY="154.0" prefHeight="25.0" prefWidth="82.0" promptText="CVC" />
+            <ImageView fitHeight="17.0" fitWidth="31.0" layoutX="44.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/creditCard.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="190.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="189.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/lock.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="23.0" fitWidth="17.0" layoutX="51.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="23.0" fitWidth="17.0" layoutX="44.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/user.png" />
                </image>
             </ImageView>
-            <RadioButton fx:id="debito" layoutX="67.0" layoutY="69.0" mnemonicParsing="false" text="Débito" textFill="#797777">
+            <RadioButton fx:id="debito" layoutX="60.0" layoutY="50.0" mnemonicParsing="false" text="Débito" textFill="#797777">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
@@ -71,17 +71,17 @@
                   <ToggleGroup fx:id="metodosTarjeta" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton fx:id="credito" layoutX="155.0" layoutY="69.0" mnemonicParsing="false" text="Crédito" textFill="#797777" toggleGroup="$metodosTarjeta">
+            <RadioButton fx:id="credito" layoutX="155.0" layoutY="50.0" mnemonicParsing="false" text="Crédito" textFill="#797777" toggleGroup="$metodosTarjeta">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </RadioButton>
-            <Button fx:id="pagarBoton" onAction= "#pagarButtonAction" layoutX="148.0" layoutY="258.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="97.0" style="-fx-background-color: #006ee1;" text="PAGAR" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="pagarBoton" layoutX="149.0" layoutY="272.0" mnemonicParsing="false" onAction="#pagarButtonAction" prefHeight="23.0" prefWidth="97.0" style="-fx-background-color: #006ee1;" text="PAGAR" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Arial" size="12.0" />
                </font>
             </Button>
-            <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="71.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="72.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/calendar.png" />
                </image>

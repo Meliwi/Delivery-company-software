@@ -17,6 +17,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import modelo.Connect;
 import modelo.Paquete;
 import java.io.File;
@@ -77,25 +78,58 @@ public class ShipmentsController implements Initializable {
 
     private String  direccionEnvioCliente;
 
-    private int numeroFactura = 0;
+    private static String id_pos = "";
 
-    private String fechaFactura;
+    private static String ciudad_pos = "";
 
-    private String paquetes[][] = new String[10][4];
+    private static String numeroFactura = "";
 
-    private int auxPaquetes = 0;
+    private static int numeroPago = 0;
 
-    private int copiaAuxPaquetes = 0;
+    private static String fechaFactura;
+
+    private static String paquetes[][] = new String[10][4];
+
+    public static int auxPaquetes = 0;
+
+    public static int getCopiaAuxPaquetes() {
+        return copiaAuxPaquetes;
+    }
+
+    public static int copiaAuxPaquetes = 0;
 
     private static String precioEnvioTotal;
 
-    private double impuestoPaquete[] = new double[10];
+    private static double impuestoPaquete[] = new double[10];
 
-    private boolean pagoHecho = false;
+    public static boolean pagoHecho = false;
+
+    public static boolean isPagoHecho() {
+        return pagoHecho;
+    }
+
+
 
     public static String getPrecioEnvioTotal() {
         return precioEnvioTotal;
     }
+
+    public static int getAuxPaquetes() {
+        return auxPaquetes;
+    }
+
+    public static void setCopiaAuxPaquetes(int copia){
+        copiaAuxPaquetes = copia;
+    }
+
+    public static void setAuxPaquetes(int aux){
+        auxPaquetes = aux;
+    }
+
+    public static void setPagoHecho(boolean pago){
+        pagoHecho = pago;
+    }
+
 
     public void registrarButtonAction(ActionEvent actionEvent) {
 
@@ -122,7 +156,7 @@ public class ShipmentsController implements Initializable {
 
     /*Función encargada de calcular el impuesto del paquete, teniendo en cuenta el peso
     y la distancia a donde se quiera enviar */
-    private double calcularImpuesto(){
+    public static double calcularImpuesto(){
 
         double impuestoTotal = 0;
         String distancia;
@@ -164,7 +198,7 @@ public class ShipmentsController implements Initializable {
     }
 
     //Funcion que calcula el precio total, teniendo en cuenta el impuesto calculado y el seguro
-    private double calcularPrecio( double impuesto) {
+    public static double calcularPrecio( double impuesto) {
         int seguro = 0;
         for (int i = 0; i < auxPaquetes; i++) {
             seguro += parseInt(paquetes[i][1]);
@@ -173,77 +207,70 @@ public class ShipmentsController implements Initializable {
     }
 
 
-    public void pagarButtonAction(ActionEvent actionEvent) throws IOException  {
 
-        double impuesto = calcularImpuesto();
-        double precio = calcularPrecio(impuesto);
-        String id_pos = "";
-        String ciudad_pos = "";
-        String cedulaCliente = controlador.ClientsController.getCedulaCliente();
-        String cedulaUsuario = controlador.LoginController.getUserID();
-        int numeroPago = 0;
-        int numeroGuiaEnvio[] = new int[auxPaquetes];
-        String metodoPagoSeleccionado = "";
 
-        Connect con  = new Connect();
+    public static boolean insertarFactura(Connect con , double precio, double impuesto){
+
 
         try {
             ResultSet resultadoFactura = con.CONSULTAR("INSERT INTO factura (fecha, valor, cantidad_paquetes, impuesto)"+
                     "VALUES (NOW()::date,'"+precio+"','" + auxPaquetes +"',"+ impuesto +") RETURNING numero, fecha");
 
             if (resultadoFactura.next()) {
-                numeroFactura = parseInt(resultadoFactura.getString(1));
+                numeroFactura = resultadoFactura.getString(1);
                 fechaFactura = resultadoFactura.getString(2);
+                return true;
             }
             else {
-                mensaje.setText("No se ha podido registrar el envio");
+                return false;
             }
         }
         catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        return false;
+    }
 
-        if(efectivo.isSelected()){
-            metodoPagoSeleccionado = "1";
-        }
-        if(tarjeta.isSelected()){
-            metodoPagoSeleccionado = "2";
-            Parent root = FXMLLoader.load(getClass().getResource("/vista/cardPayment.fxml"));
-            Stage cardPayment = new Stage();
-            cardPayment .setTitle("Pago con tarjeta");
-            cardPayment.setScene(new Scene(root, 393, 377));
-            cardPayment.show();
-        }
-
+    public static boolean insertarPago(Connect con, String metodoPagoSeleccionado){
         try {
             ResultSet resultadoPago = con.CONSULTAR("INSERT INTO pago (num_factura, id_metodo_pago)"+
                     "VALUES ('"+numeroFactura+"','"+metodoPagoSeleccionado+"') RETURNING numero");
 
             if (resultadoPago.next()) {
                 numeroPago = parseInt(resultadoPago.getString(1));
+                return true;
             }
             else {
-                mensaje.setText("No se ha podido registrar el envio");
+                return false;
             }
         }
         catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        return false;
+    }
+
+    public static boolean consultarInformacionPOS(Connect con ){
+
         try {
-            ResultSet resultadoPOS = con.CONSULTAR("SELECT identificador_pos, ciudad FROM usuarios, pos WHERE cedula = '"+ cedulaUsuario+ "'");
+            ResultSet resultadoPOS = con.CONSULTAR("SELECT identificador_pos, ciudad FROM usuarios, pos WHERE cedula = '"+ controlador.LoginController.getUserID()+ "'");
 
             if (resultadoPOS.next()) {
                 id_pos = resultadoPOS.getString(1);
                 ciudad_pos = resultadoPOS.getString(2);
+                return true;
             }
             else {
-                mensaje.setText("No se ha podido registrar el envio");
+                return false;
             }
         }
         catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        return false;
+    }
 
+    public static boolean gestionarEnvios(Connect con,int numeroGuiaEnvio[] ){
         for (int i = 0; i < auxPaquetes; i++) {
             try {
                 ResultSet resultadoEnvio = con.CONSULTAR("INSERT INTO envio (id_estado_envio, locaLizacion, direccion_envio, seguro)"+
@@ -253,7 +280,7 @@ public class ShipmentsController implements Initializable {
                     numeroGuiaEnvio[i] = parseInt(resultadoEnvio.getString(1));
                 }
                 else {
-                    mensaje.setText("No se ha podido registrar el envio");
+                    return false;
                 }
             }
             catch (SQLException throwables) {
@@ -261,22 +288,62 @@ public class ShipmentsController implements Initializable {
             }
 
             String resultadoGestionEnvios = "INSERT INTO gestion_envios (num_pago, id_envio, cedula_cliente, id_pos)"+
-                    "VALUES ('"+numeroPago+"','"+numeroGuiaEnvio[i]+"','"+cedulaCliente+"','"+id_pos+"')";
+                    "VALUES ('"+numeroPago+"','"+numeroGuiaEnvio[i]+"','"+controlador.ClientsController.getCedulaCliente()+"','"+id_pos+"')";
 
             if (con.GUARDAR(resultadoGestionEnvios)) {
-                mensaje.setText("El envio se registró con exito");
+
             }
             else {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    public void pagarButtonAction(ActionEvent actionEvent) throws IOException  {
+
+        double impuesto = calcularImpuesto();
+        double precio = calcularPrecio(impuesto);
+
+        precioEnvioTotal = Integer.toString((int)precio);
+
+        int numeroGuiaEnvio[] = new int[auxPaquetes];
+        String metodoPagoSeleccionado = "";
+
+        Connect con  = new Connect();
+
+        //Agregar la verificacion
+
+        if(efectivo.isSelected()){
+            metodoPagoSeleccionado = "1";
+            insertarFactura(con,precio, impuesto);
+            insertarPago(con, metodoPagoSeleccionado);
+            consultarInformacionPOS(con);
+            if(gestionarEnvios(con, numeroGuiaEnvio)){
+                mensaje.setText("El envio se registró con exito");
+
+                copiaAuxPaquetes = auxPaquetes;
+                auxPaquetes = 0;
+
+                precioTotal.setText("Total a pagar: " + precioEnvioTotal);
+                pagoHecho = true;
+            }
+            else{
                 mensaje.setText("No se ha podido registrar el envio");
             }
         }
-        copiaAuxPaquetes = auxPaquetes;
-        auxPaquetes = 0;
-        precioEnvioTotal = Integer.toString((int)precio);
-        precioTotal.setText("Total a pagar: " + precioEnvioTotal);
-        pagoHecho = true;
+        else{
+            metodoPagoSeleccionado = "2";
+            Parent root = FXMLLoader.load(getClass().getResource("/vista/cardPayment.fxml"));
+            Stage cardPayment = new Stage();
+            cardPayment .setTitle("Pago con tarjeta");
+            cardPayment.setScene(new Scene(root, 393, 377));
+            cardPayment.show();
+        }
 
     }
+
     private ObservableList<Paquete> fillTableShipments(){
         ObservableList<Paquete> listaInfo = FXCollections.observableArrayList();
         calcularImpuesto();

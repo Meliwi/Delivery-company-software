@@ -63,10 +63,10 @@ public class ClientsController implements Initializable {
                 telefonoCliente = resultado.getString(6);
                 direccionCliente = resultado.getString(7) + "," + resultado.getString(5);
                 Parent root = FXMLLoader.load(getClass().getResource("/vista/shipments.fxml"));
-                Stage modulesStage = ((Stage)(((Button)event.getSource()).getScene().getWindow()));
-                modulesStage.setTitle("Gestión de módulos");
-                modulesStage.setScene(new Scene(root, 900, 600));
-                modulesStage.show();
+                Stage shipmentsStage = ((Stage)(((Button)event.getSource()).getScene().getWindow()));
+                shipmentsStage.setTitle("Gestión de envios");
+                shipmentsStage.setScene(new Scene(root, 900, 600));
+                shipmentsStage.show();
                 con.CERRAR();
             }
             else {
