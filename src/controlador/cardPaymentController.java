@@ -109,7 +109,7 @@ public class cardPaymentController implements Initializable {
 
                 }
                 else{
-                    mensaje.setText("Por favor verifique el formato de la fecha de vencimiento (MM/YYYY) y los demás datos de su tarjeta");
+                    mensaje.setText("Por favor verifique el formato de la fecha de vencimiento (MM/YYYY), el saldo y los demás datos de su tarjeta");
                 }
 
             }
