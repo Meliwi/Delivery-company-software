@@ -88,7 +88,15 @@ public class ShipmentsController implements Initializable {
 
     private static String fechaFactura;
 
-    private static String paquetes[][] = new String[10][4];
+    public static String[][] getPaquetes() {
+        return paquetes;
+    }
+
+    public static void setPaquetes(String[][] shipment) {
+        paquetes = shipment;
+    }
+
+    public static String paquetes[][] = new String[10][4];
 
     public static int auxPaquetes = 0;
 
