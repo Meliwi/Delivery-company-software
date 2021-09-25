@@ -1,5 +1,3 @@
-
-
 package controlador;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +11,6 @@ import javafx.event.ActionEvent;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import java.net.URL;
-
 
 
 public class ModulesController implements Initializable {
@@ -129,7 +126,4 @@ public class ModulesController implements Initializable {
         loginStage.setScene(new Scene(root, 900, 600));
         loginStage.show();
     }
-
-
-
 }
