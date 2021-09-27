@@ -61,7 +61,11 @@ public class ModulesController implements Initializable {
                         return;
                     }
                     case "Reportes" -> {
-                        mensaje.setText("Este módulo aún se encuentra en desarrollo");
+                        root = FXMLLoader.load(getClass().getResource("/vista/reports.fxml"));
+                        Stage usersStage = ((Stage) (((Button) event.getSource()).getScene().getWindow()));
+                        usersStage.setTitle("Reportes");
+                        usersStage.setScene(new Scene(root, 900, 600));
+                        usersStage.show();
                         return;
                     }
                     default -> {
