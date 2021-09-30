@@ -1,5 +1,8 @@
 package tests;
+import static org.mockito.Mockito.*;
+import controlador.LoginController;
 import controlador.ShipmentsController;
+import javafx.event.ActionEvent;
 import modelo.Connect;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +18,7 @@ public class ShipmentsControllerTest {
     public void setUp(){
         envioPaquetes = new ShipmentsController();
         conexion = new Connect();
-        String paquetes[][] = {{"cra prra vida", "0", "24", "Mismo departamento"},
+        String paquetes[][] = {{"cra 35A #39-61", "0", "24", "Mismo departamento"},
                                 {"calle 55", "1000", "5", "Interdepartamental"}};
         envioPaquetes.setPaquetes(paquetes);
         envioPaquetes.setAuxPaquetes(2);
