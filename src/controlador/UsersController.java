@@ -63,12 +63,35 @@ public class UsersController implements Initializable {
         String contrasenaUsuario = contrasena.getText().trim();
         String idSedeUsuario = idSede.getText().trim();
         String idPosUsuario = idPos.getText().trim();
+        String idRol = "";
+        switch (rolUsuario) {
+            case "Gerente" -> {
+                idRol="1";
+            }
+            case "Auxiliar de operaciones" -> {
+                idRol="2";
+            }
+            case "Secretaria/o" -> {
+                idRol="3";
+            }
+            case "Operador/a de oficina" -> {
+                idRol="4";
+            }
+            case "Contador/a" -> {
+                idRol="5";
+            }
+            default -> {
+                mensaje.setText("Por favor verifique el rol ingresado");
+                return;
+            }
+        }
+
 
         Connect con  = new Connect();
 
         try {
             String creacion = "INSERT INTO usuarios (cedula, num_nomina, id_estado, codigo_rol, nit_empresa, identificador_pos, id_sede , nombre, apellido, telefono,correo, contrasena)"+
-                    "VALUES ('"+cedulaUsuario+"','"+numNominaUsuario+"','"+idEstado+"','"+rolUsuario+"','"+nitEmpresa+"','"+idPosUsuario+"','"+idSedeUsuario+"','"+nombreUsuario+"','"+apellidoUsuario+"','"+telefonoUsuario+"','"+correoUsuario+"','"+contrasenaUsuario+"')";
+                    "VALUES ('"+cedulaUsuario+"','"+numNominaUsuario+"','"+idEstado+"','"+idRol+"','"+nitEmpresa+"','"+idPosUsuario+"','"+idSedeUsuario+"','"+nombreUsuario+"','"+apellidoUsuario+"','"+telefonoUsuario+"','"+correoUsuario+"','"+contrasenaUsuario+"')";
 
             if (con.GUARDAR(creacion)) {
                 cedula.setText("");
