@@ -56,6 +56,9 @@ public class ShipmentsController implements Initializable {
     public Label precioTotal;
 
     @FXML
+    public Label alert;
+
+    @FXML
     public TextField pesoPaquete;
 
     @FXML
@@ -595,7 +598,16 @@ public class ShipmentsController implements Initializable {
             }
         }
         else{
-            System.out.println("Debe realizar un pago para poder generar una factura");
+            alert.setText("Debe realizar un pago para poder generar una factura");
         }
+    }
+
+    @FXML
+    public void regresarModulos(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/vista/modules.fxml"));
+        Stage modulesStage = ((Stage)(((Button)event.getSource()).getScene().getWindow()));//new Stage();
+        modulesStage.setTitle("Gestión de módulos");
+        modulesStage.setScene(new Scene(root, 900, 600));
+        modulesStage.show();
     }
 }
