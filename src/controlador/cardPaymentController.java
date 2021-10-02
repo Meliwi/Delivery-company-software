@@ -81,8 +81,8 @@ public class cardPaymentController implements Initializable {
                     numeroTipo = "2";
                 }
 
-                if(nombreTitular.equals(titular.getText().trim().toLowerCase()) & fechaVencimiento.equals(fecha.getText().trim().toLowerCase())
-                   & cvcTarjeta.equals(cvc.getText().trim().toLowerCase()) & numeroTipo.equals(tipoTarjeta)  & saldo>=pago){
+                if(nombreTitular.equals(titular.getText().trim()) & fechaVencimiento.equals(fecha.getText().trim())
+                   & cvcTarjeta.equals(cvc.getText().trim()) & numeroTipo.equals(tipoTarjeta)  & saldo>=pago){
 
                     int saldoRestante = saldo-pago;
                     con.GUARDAR("UPDATE tarjetas_registradas SET saldo="+ saldoRestante+"WHERE numerotarjeta='"

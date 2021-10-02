@@ -591,7 +591,7 @@ public class ShipmentsController implements Initializable {
                 doc.add(enviosInfo);
                 doc.add(totalEnvio);
 
-                System.out.println("Factura generada exitosamente");
+                alert.setText("Factura generada exitosamente");
                 doc.close();
             } catch (Exception e) {
                 System.out.println("Something went wrong " + e);

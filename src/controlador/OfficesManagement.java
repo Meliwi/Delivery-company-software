@@ -66,14 +66,14 @@ public class OfficesManagement implements Initializable {
                 ciudad.setText("");
                 telefono.setText("");
                 direccion.setText("");
-                Parent root = FXMLLoader.load(getClass().getResource("/vista/popupWindow.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/vista/officesWindowAlert.fxml"));
                 Stage registroStage = new Stage();
                 registroStage.setTitle("Registro");
                 registroStage.setScene(new Scene(root, 458, 100));
                 registroStage.show();
             }
             else{
-                Parent root = FXMLLoader.load(getClass().getResource("/vista/alertWindow.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/officesWindowUpdate.fxml"));
                 Stage registroStage = new Stage();
                 registroStage.setTitle("Registro");
                 registroStage.setScene(new Scene(root, 458, 100));
@@ -121,7 +121,7 @@ public class OfficesManagement implements Initializable {
                 ciudad.setText("");
                 telefono.setText("");
                 direccion.setText("");
-                Parent root = FXMLLoader.load(getClass().getResource("/vista/updateUserWindow.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/vista/officesWindowUpdate.fxml"));
                 Stage actualizacionStage = new Stage();
                 actualizacionStage.setTitle("Actualización");
                 actualizacionStage.setScene(new Scene(root, 458, 100));
@@ -134,4 +134,20 @@ public class OfficesManagement implements Initializable {
         }
     }
 
+    public void BorrarSedeAction(ActionEvent actionEvent) throws IOException {
+        Connect con  = new Connect();
+        if(id_sede.getText().trim().isEmpty()){
+            mensaje.setText("Porfavor ingrese el nombre de la sede");
+        }
+        else{
+            con.GUARDAR("DELETE FROM sede WHERE id_sede = '"+id_sede.getText().trim()+"'");
+            id_sede.setText(null);
+            Parent root = FXMLLoader.load(getClass().getResource("/vista/deleteSedeWindow.fxml"));
+            Stage borrarStage = new Stage();
+            borrarStage.setTitle("Eliminación");
+            borrarStage.setScene(new Scene(root, 458, 100));
+            borrarStage.show();
+            con.CERRAR();
+        }
+    }
 }
