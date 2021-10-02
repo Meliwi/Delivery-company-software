@@ -84,3 +84,28 @@
     -fx-text-background-color: black;
     -fx-table-cell-border-color: #c7c7c7;
 }
+
+#textArea *.text{
+     -fx-text-alignment: center;
+}
+
+#textArea{
+    -fx-font-size: 14px;
+    -fx-text-inner-color: #898989;
+    -fx-font-family: 'Arial';
+
+    -fx-background-color: #f4f4f4;
+}
+
+#textArea .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+#textArea .scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+
+
+#textArea .scroll-pane .content{
+    -fx-background-color: transparent;
+}
