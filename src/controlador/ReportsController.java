@@ -72,10 +72,8 @@ public class ReportsController {
 
                     JFreeChart chart = ChartFactory.createBarChart3D("Número de envíos por día en el último mes", "fecha", "num_envios", dataset, PlotOrientation.VERTICAL, false, true, false);
                     CategoryPlot p = chart.getCategoryPlot();
-
-                    //p.setRangeGridlinePaint(Color.BLUE);
                     ChartFrame frameGraph = new ChartFrame("Reporte ultimo mes",chart);
-                    //frameGraph.setLocationRelativeTo();
+                    frameGraph.setLocationRelativeTo(null);
                     frameGraph.setLocation(500,170);
                     frameGraph.setVisible(true);
                     frameGraph.setSize(400,400);

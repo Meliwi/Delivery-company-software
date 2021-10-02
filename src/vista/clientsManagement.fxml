@@ -75,6 +75,11 @@
                                 <Font name="Arial" size="12.0" />
                             </font>
                         </Button>
+                  <Label fx:id="mensaje" alignment="CENTER" layoutX="85.0" layoutY="354.0" prefHeight="17.0" prefWidth="258.0" textAlignment="CENTER" textFill="#f51a1a">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </Label>
                     </children>
                 </Pane>
             </children>

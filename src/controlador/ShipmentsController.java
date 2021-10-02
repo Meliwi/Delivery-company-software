@@ -219,7 +219,6 @@ public class ShipmentsController implements Initializable {
 
     public static boolean insertarFactura(Connect con , double precio, double impuesto){
 
-
         try {
             ResultSet resultadoFactura = con.CONSULTAR("INSERT INTO factura (fecha, valor, cantidad_paquetes, impuesto)"+
                     "VALUES (NOW()::date,'"+precio+"','" + auxPaquetes +"',"+ impuesto +") RETURNING numero, fecha");
